@@ -1,0 +1,22 @@
+@import './base.css';
+
+#app {
+  font-weight: normal;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1280px;
+  padding: 0.5rem 1rem;
+  margin: 0 auto;
+
+  @media screen and (min-width: 640px) {
+    padding: 0.5rem 1.25rem;
+  }
+  @media screen and (min-width: 768px) {
+    padding: 0.5rem 1.5rem;
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 0.5rem 1.75rem;
+  }
+}
