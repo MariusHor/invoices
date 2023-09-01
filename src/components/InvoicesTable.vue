@@ -20,7 +20,7 @@ function increasePageCount() {
 }
 
 function decreasePageCount() {
-  currentPage.value = currentPage.value === 0 ? currentPage.value : currentPage.value - 1
+  currentPage.value -= 1
 }
 </script>
 

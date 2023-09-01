@@ -11,7 +11,11 @@ const emit = defineEmits(['increasePageCount', 'decreasePageCount'])
 
 <template>
   <div class="pagination">
-    <PaginationButton :imgClass="'icon-prev'" @click="emit('decreasePageCount')" />
+    <PaginationButton
+      :imgClass="'icon-prev'"
+      @click="emit('decreasePageCount')"
+      :disabled="currentPage === 0"
+    />
     <span class="pagination__current">{{ currentPage }}</span>
     <PaginationButton
       :imgClass="'icon-next'"
@@ -39,6 +43,10 @@ const emit = defineEmits(['increasePageCount', 'decreasePageCount'])
 
     &__control
         border: solid 1px var(--clr-light-grey)
+        &:disabled
+          opacity: 0.35
+          cursor: initial
+
 
     &__current
         background: var(--clr-black)
