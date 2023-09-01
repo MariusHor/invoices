@@ -10,9 +10,9 @@ const variantClass = computed(() => `button--${variant}`)
 
 <template>
   <button class="button" :class="variantClass">
-    <slot name="icon-start"></slot>
+    <slot name="start"></slot>
     {{ text }}
-    <slot name="icon-end"></slot>
+    <slot name="end"></slot>
   </button>
 </template>
 
@@ -20,6 +20,8 @@ const variantClass = computed(() => `button--${variant}`)
 .button
     border-radius: 3px
     padding: 0.5rem 1rem
+    display: flex
+    align-items: center
 
     &--light
         border: solid 1px var(--clr-light-grey)
