@@ -8,7 +8,7 @@ const selectStates = ['closed', 'open']
 const target = ref(null)
 const selectedValue = ref(selectOptions[0])
 const currentSelectState = ref(selectStates[0])
-const selectStateClass = computed(() => `select--${currentSelectState.value}`)
+const selectIconClass = computed(() => `select__icon--${currentSelectState.value}`)
 
 function handleSelectOption(option) {
   selectedValue.value = option
@@ -25,8 +25,16 @@ onClickOutside(target, () => (currentSelectState.value = selectStates[0]))
 
 <template>
   <div ref="target">
-    <button class="select" :class="selectStateClass" @click="handleCurrentState">
+    <button class="select" @click="handleCurrentState">
       {{ selectedValue }}
+      <img
+        src="/select-arrow.svg"
+        width="16"
+        height="16"
+        alt=""
+        class="select__icon"
+        :class="selectIconClass"
+      />
     </button>
     <ul v-if="currentSelectState === selectStates[1]" class="select__list">
       <li v-for="option in selectOptions" :key="option">
