@@ -1,33 +1,32 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-
-const selectOptions = ['Cele mai noi', 'Cele mai vechi', 'Suma mai mare', 'Suma mai mica']
-const selectStates = ['closed', 'open']
+import { SORTING_OPTIONS } from '@/helpers'
+import { DROPDOWN_STATES } from '../helpers'
 
 const target = ref(null)
-const selectedValue = ref(selectOptions[0])
-const currentSelectState = ref(selectStates[0])
+const currentSortingValue = ref(SORTING_OPTIONS[0])
+const currentDropdownState = ref(DROPDOWN_STATES[0])
 
-const selectIconClass = computed(() => `select__icon--${currentSelectState.value}`)
+const selectIconClass = computed(() => `select__icon--${currentDropdownState.value}`)
 
-function handleSelectOption(option) {
-  selectedValue.value = option
-  currentSelectState.value = selectStates[0]
+function handleSortingOption(option) {
+  currentSortingValue.value = option
+  currentDropdownState.value = DROPDOWN_STATES[0]
 }
 
 function handleCurrentState() {
-  currentSelectState.value =
-    currentSelectState.value === selectStates[0] ? selectStates[1] : selectStates[0]
+  currentDropdownState.value =
+    currentDropdownState.value === DROPDOWN_STATES[0] ? DROPDOWN_STATES[1] : DROPDOWN_STATES[0]
 }
 
-onClickOutside(target, () => (currentSelectState.value = selectStates[0]))
+onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 </script>
 
 <template>
   <div ref="target">
     <button class="select" @click="handleCurrentState">
-      {{ selectedValue }}
+      {{ currentSortingValue }}
       <img
         src="/select-arrow.svg"
         width="16"
@@ -37,13 +36,13 @@ onClickOutside(target, () => (currentSelectState.value = selectStates[0]))
         :class="selectIconClass"
       />
     </button>
-    <ul v-if="currentSelectState === selectStates[1]" class="select__list">
+    <ul v-if="currentDropdownState === DROPDOWN_STATES[1]" class="select__list">
       <li
-        v-for="option in selectOptions"
+        v-for="option in SORTING_OPTIONS"
         :key="option"
-        :class="{ active: option === selectedValue }"
+        :class="{ active: option === currentSortingValue }"
       >
-        <button @click="handleSelectOption(option)">
+        <button @click="handleSortingOption(option)">
           {{ option }}
         </button>
       </li>
