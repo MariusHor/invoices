@@ -70,6 +70,7 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
         transform: rotate(180deg)
 
     &__list
+      background: var(--clr-white)
       margin-top: 0.5rem
       position: absolute
       border: 1px solid var(--clr-light-grey)
