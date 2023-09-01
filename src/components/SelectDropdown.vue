@@ -58,11 +58,13 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
     background: transparent
     border: 1px solid var(--clr-light-grey)
     border-radius: 4px
-    width: 100%
+    width: 10rem
     max-width: 160px
-    padding: 0.5rem 1rem
+    height: 42px
+    padding: 0 1rem
     display: flex
     justify-content: space-between
+    align-items: center
     font-weight: bold
 
     &__icon
@@ -70,6 +72,7 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
         transform: rotate(180deg)
 
     &__list
+      background: var(--clr-white)
       margin-top: 0.5rem
       position: absolute
       border: 1px solid var(--clr-light-grey)
