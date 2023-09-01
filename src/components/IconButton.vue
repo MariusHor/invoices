@@ -20,7 +20,6 @@ const variantClass = computed(() => `button--${variant}`)
 .button
     border-radius: 3px
     padding: 0.5rem 1rem
-    cursor: pointer
 
     &--light
         border: solid 1px var(--clr-light-grey)
