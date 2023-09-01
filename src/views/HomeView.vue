@@ -1,6 +1,9 @@
-<script setup></script>
+<script setup>
+import SelectDropdown from '@/components/SelectDropdown.vue'
+</script>
 
 <template>
+  <SelectDropdown />
   <main>APP</main>
 </template>
 
