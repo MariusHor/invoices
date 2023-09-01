@@ -61,8 +61,11 @@ a {
 
 ul {
   list-style: none;
+  padding: 0;
 }
 
 button {
   cursor: pointer;
+  background: transparent;
+  border: none;
 }

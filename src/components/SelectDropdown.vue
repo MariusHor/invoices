@@ -8,6 +8,7 @@ const selectStates = ['closed', 'open']
 const target = ref(null)
 const selectedValue = ref(selectOptions[0])
 const currentSelectState = ref(selectStates[0])
+
 const selectIconClass = computed(() => `select__icon--${currentSelectState.value}`)
 
 function handleSelectOption(option) {
@@ -37,11 +38,50 @@ onClickOutside(target, () => (currentSelectState.value = selectStates[0]))
       />
     </button>
     <ul v-if="currentSelectState === selectStates[1]" class="select__list">
-      <li v-for="option in selectOptions" :key="option">
-        <button @click="() => handleSelectOption(option)">{{ option }}</button>
+      <li
+        v-for="option in selectOptions"
+        :key="option"
+        :class="{ active: option === selectedValue }"
+      >
+        <button @click="handleSelectOption(option)">
+          {{ option }}
+        </button>
       </li>
     </ul>
   </div>
 </template>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+.active
+    background: var(--clr-light-grey)
+.select
+    position: relative
+    background: transparent
+    border: 1px solid var(--clr-light-grey)
+    border-radius: 4px
+    width: 100%
+    max-width: 160px
+    padding: 0.5rem 1rem
+    display: flex
+    justify-content: space-between
+    font-weight: bold
+
+    &__icon
+      &--open
+        transform: rotate(180deg)
+
+    &__list
+      margin-top: 0.5rem
+      position: absolute
+      border: 1px solid var(--clr-light-grey)
+      border-radius: 4px
+      width: 100%
+      max-width: 160px
+
+      li:not(:last-child)
+        border-bottom: solid 1px var(--clr-light-grey)
+
+      button
+        width: 100%
+        padding: 0.5rem 0
+</style>
