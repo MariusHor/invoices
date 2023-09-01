@@ -4,7 +4,6 @@ import InvoicesTable from '@/components/InvoicesTable.vue'
 
 <template>
   <InvoicesTable />
-  <main>APP</main>
 </template>
 
 <style scoped lang="sass">

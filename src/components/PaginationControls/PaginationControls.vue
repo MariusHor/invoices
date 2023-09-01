@@ -1,23 +1,23 @@
 <script setup>
-import { ref } from 'vue'
 import PaginationButton from './PaginationButton.vue'
 
-const currentPage = ref(0)
+defineProps({
+  currentPage: Number,
+  hasNextPage: Boolean
+})
 
-function increasePage() {
-  currentPage.value += 1
-}
-
-function decreasePage() {
-  currentPage.value = currentPage.value === 0 ? currentPage.value : currentPage.value - 1
-}
+const emit = defineEmits(['increasePageCount', 'decreasePageCount'])
 </script>
 
 <template>
   <div class="pagination">
-    <PaginationButton :imgClass="'icon-prev'" @click="decreasePage" />
+    <PaginationButton :imgClass="'icon-prev'" @click="emit('decreasePageCount')" />
     <span class="pagination__current">{{ currentPage }}</span>
-    <PaginationButton :imgClass="'icon-next'" @click="increasePage" />
+    <PaginationButton
+      :imgClass="'icon-next'"
+      @click="emit('increasePageCount')"
+      :disabled="!hasNextPage"
+    />
   </div>
 </template>
 

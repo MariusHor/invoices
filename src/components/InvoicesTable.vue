@@ -1,47 +1,70 @@
 <script setup>
-import { ref } from 'vue'
-import { TABLE_HEADINGS, invoicesData } from '@/helpers'
+import { ref, computed } from 'vue'
+import { TABLE_HEADINGS, MAX_INV_PER_PAGE, invoicesData } from '@/helpers'
+import PaginationControls from './PaginationControls/PaginationControls.vue'
 
 const invoiceToExpandId = ref(null)
+const currentPage = ref(0)
+
+const startIndex = computed(() => currentPage.value * MAX_INV_PER_PAGE)
+const endIndex = computed(() => startIndex.value + MAX_INV_PER_PAGE)
+const hasNextPage = computed(() => endIndex.value < invoicesData.length)
+const currentPageInvoices = computed(() => invoicesData.slice(startIndex.value, endIndex.value))
 
 function toggleExpandInvoice(id) {
   invoiceToExpandId.value = invoiceToExpandId.value === id ? null : id
 }
+
+function increasePageCount() {
+  currentPage.value += 1
+}
+
+function decreasePageCount() {
+  currentPage.value = currentPage.value === 0 ? currentPage.value : currentPage.value - 1
+}
 </script>
 
 <template>
-  <table aria-label="Table of invoices">
-    <thead>
-      <tr>
-        <th></th>
-        <th scope="col" v-for="heading in TABLE_HEADINGS" :key="heading" width="160">
-          {{ heading }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <template v-for="invoice in invoicesData" :key="invoice.id">
+  <div>
+    <table aria-label="Table of invoices">
+      <thead>
         <tr>
-          <td>
-            <button @click="() => toggleExpandInvoice(invoice.id)">
-              <img src="/select-arrow.svg" alt="" width="16" height="16" />
-            </button>
-          </td>
-          <td v-for="key in Object.keys(invoice)" :key="key" width="160">
-            <template v-if="key !== 'description'">
-              {{ key === 'total' ? '$' : '' }} {{ invoice[key] }}
-            </template>
-          </td>
+          <th></th>
+          <th scope="col" v-for="heading in TABLE_HEADINGS" :key="heading" width="160">
+            {{ heading }}
+          </th>
         </tr>
-        <tr v-if="invoiceToExpandId === invoice.id">
-          <td colspan="6">
-            <span>Detalii</span>
-            <p>{{ invoice['description'] }}</p>
-          </td>
-        </tr>
-      </template>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <template v-for="invoice in currentPageInvoices" :key="invoice.id">
+          <tr>
+            <td>
+              <button @click="() => toggleExpandInvoice(invoice.id)">
+                <img src="/select-arrow.svg" alt="" width="16" height="16" />
+              </button>
+            </td>
+            <td v-for="key in Object.keys(invoice)" :key="key" width="160">
+              <template v-if="key !== 'description'">
+                {{ key === 'total' ? '$' : '' }} {{ invoice[key] }}
+              </template>
+            </td>
+          </tr>
+          <tr v-if="invoiceToExpandId === invoice.id">
+            <td colspan="6">
+              <span>Detalii</span>
+              <p>{{ invoice['description'] }}</p>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <PaginationControls
+      :currentPage="currentPage"
+      :hasNextPage="hasNextPage"
+      @increasePageCount="increasePageCount"
+      @decreasePageCount="decreasePageCount"
+    />
+  </div>
 </template>
 
 <style scoped lang="sass">
