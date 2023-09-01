@@ -1,9 +1,6 @@
-<script setup>
-import IconButton from '@/components/IconButton.vue'
-</script>
+<script setup></script>
 
 <template>
-  <IconButton text="button" variant="dark" />
   <main>APP</main>
 </template>
 
