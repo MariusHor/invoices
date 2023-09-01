@@ -26,6 +26,9 @@ const emit = defineEmits(['increasePageCount', 'decreasePageCount'])
     display: flex
     align-items: center
     gap: 1rem
+    width: fit-content
+    margin: 0 auto
+    margin-top: 3rem
 
     &__control, &__current
         display: grid
