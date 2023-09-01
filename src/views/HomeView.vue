@@ -1,6 +1,9 @@
-<script setup></script>
+<script setup>
+import InvoicesTable from '@/components/InvoicesTable.vue'
+</script>
 
 <template>
+  <InvoicesTable />
   <main>APP</main>
 </template>
 
