@@ -32,7 +32,6 @@ const emit = defineEmits(['increasePageCount', 'decreasePageCount'])
     gap: 1rem
     width: fit-content
     margin: 0 auto
-    margin-top: 3rem
 
     &__control, &__current
         display: grid

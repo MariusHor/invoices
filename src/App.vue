@@ -4,9 +4,16 @@ import NavBar from '@/components/NavBar.vue'
 
 <template>
   <NavBar />
-  <main>
+  <main class="container">
     <router-view></router-view>
   </main>
 </template>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+main
+  padding: 3rem
+  max-width: 55rem
+  height: 100%
+  display: flex
+  flex-direction: column
+</style>

@@ -29,8 +29,8 @@ function decreasePageCount() {
     <table aria-label="Table of invoices">
       <thead>
         <tr>
-          <th></th>
-          <th scope="col" v-for="heading in TABLE_HEADINGS" :key="heading" width="160">
+          <th width="80"></th>
+          <th scope="col" v-for="heading in TABLE_HEADINGS" :key="heading" width="150">
             {{ heading }}
           </th>
         </tr>
@@ -44,7 +44,7 @@ function decreasePageCount() {
               </button>
             </td>
             <template v-for="key in Object.keys(invoice)" :key="key">
-              <td v-if="key !== 'description'" width="160">
+              <td v-if="key !== 'description'" width="150">
                 {{ key === 'total' ? '$' : '' }} {{ invoice[key] }}
               </td>
             </template>
@@ -70,6 +70,11 @@ function decreasePageCount() {
 <style scoped lang="sass">
 .table-wrapper
   width: fit-content
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
 table
   text-align: center
   border-spacing: 0
