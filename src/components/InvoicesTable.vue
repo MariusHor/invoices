@@ -20,14 +20,6 @@ const currentPageInvoices = computed(() =>
 function toggleExpandInvoice(id) {
   invoiceToExpandId.value = invoiceToExpandId.value === id ? null : id
 }
-
-function increasePageCount() {
-  currentPage.value += 1
-}
-
-function decreasePageCount() {
-  currentPage.value -= 1
-}
 </script>
 
 <template>
@@ -67,8 +59,8 @@ function decreasePageCount() {
     <PaginationControls
       :currentPage="currentPage"
       :hasNextPage="hasNextPage"
-      @increasePageCount="increasePageCount"
-      @decreasePageCount="decreasePageCount"
+      @increasePageCount="currentPage += 1"
+      @decreasePageCount="currentPage -= 1"
     />
   </div>
 </template>

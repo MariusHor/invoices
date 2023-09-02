@@ -1,20 +1,14 @@
-<script setup></script>
+<script setup>
+import { InvoiceForm } from '@/components'
+import { AppLayout } from '@/layouts'
+</script>
 
 <template>
-  <h1 class="section-header">Factura noua</h1>
+  <AppLayout :headerText="'Factura noua'">
+    <template #content>
+      <InvoiceForm />
+    </template>
+  </AppLayout>
 </template>
 
-<style scoped lang="sass">
-.section-header
-  margin-bottom: 4rem
-
-.section-content
-  display: flex
-  flex-direction: column
-  gap: 1.575rem
-  height: 100%
-.section-actions
-  display: flex
-  justify-content: space-between
-  align-items: center
-</style>
+<style scoped lang="sass"></style>
