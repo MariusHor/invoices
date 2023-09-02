@@ -33,6 +33,10 @@ const getters = {
         return state.items
           .sort((a, b) => compareStringDates(a.date, b.date))
           .slice(startIndex.value, endIndex.value)
+      case SORTING_OPTIONS[2]:
+        return state.items.sort((a, b) => b.total - a.total).slice(startIndex.value, endIndex.value)
+      case SORTING_OPTIONS[3]:
+        return state.items.sort((a, b) => a.total - b.total).slice(startIndex.value, endIndex.value)
       default:
         return state.items
           .sort((a, b) => compareStringDates(b.date, a.date))
