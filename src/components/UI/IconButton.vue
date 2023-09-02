@@ -1,19 +1,35 @@
 <script setup>
 import { computed } from 'vue'
-const { text, variant } = defineProps({
-  text: String,
-  variant: String
+const { text, variant, isLink, to } = defineProps({
+  text: {
+    type: String,
+    required: true
+  },
+  variant: {
+    type: String,
+    default: 'light'
+  },
+  isLink: {
+    type: Boolean,
+    default: false
+  },
+  to: String
 })
 
 const variantClass = computed(() => `button--${variant}`)
 </script>
 
 <template>
-  <button class="button" :class="variantClass">
+  <button v-if="!isLink" class="button" :class="variantClass">
     <slot name="start"></slot>
     {{ text }}
     <slot name="end"></slot>
   </button>
+  <router-link v-if="isLink" class="button" :class="variantClass" :to="to">
+    <slot name="start"></slot>
+    {{ text }}
+    <slot name="end"></slot>
+  </router-link>
 </template>
 
 <style scoped lang="sass">

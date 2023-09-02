@@ -9,7 +9,7 @@ import { Icon } from '@iconify/vue'
     <template #content>
       <div class="section-actions">
         <SelectSorting />
-        <IconButton :text="'Adauga'" variant="dark">
+        <IconButton :text="'Adauga'" variant="dark" :isLink="true" :to="'/invoices/create'">
           <template #start>
             <Icon icon="octicon:plus-16" width="24" />
           </template>
