@@ -1,15 +1,19 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { TABLE_HEADINGS, MAX_INV_PER_PAGE, invoicesData } from '@/helpers'
-import PaginationControls from './PaginationControls/PaginationControls.vue'
+import { useStore } from 'vuex'
+import { TABLE_HEADINGS, MAX_INV_PER_PAGE } from '@/helpers'
+import { PaginationControls } from './UI'
+
+const store = useStore()
 
 const invoiceToExpandId = ref(null)
 const currentPage = ref(0)
 
+const invoices = computed(() => store.state.invoices.items)
 const startIndex = computed(() => currentPage.value * MAX_INV_PER_PAGE)
 const endIndex = computed(() => startIndex.value + MAX_INV_PER_PAGE)
-const hasNextPage = computed(() => endIndex.value < invoicesData.length)
-const currentPageInvoices = computed(() => invoicesData.slice(startIndex.value, endIndex.value))
+const hasNextPage = computed(() => endIndex.value < invoices.value.length)
+const currentPageInvoices = computed(() => invoices.value.slice(startIndex.value, endIndex.value))
 
 function toggleExpandInvoice(id) {
   invoiceToExpandId.value = invoiceToExpandId.value === id ? null : id
