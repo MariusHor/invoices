@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-const { text, variant, isLink, to } = defineProps({
+const { text, variant, isLink, to, width, type } = defineProps({
   text: {
     type: String,
     required: true
@@ -9,16 +9,24 @@ const { text, variant, isLink, to } = defineProps({
     type: String,
     default: 'light'
   },
+  width: {
+    type: String,
+    default: 'fit'
+  },
   isLink: {
     type: Boolean,
     default: false
+  },
+  type: {
+    type: String,
+    default: 'button'
   },
   to: String
 })
 
 const emit = defineEmits(['handleClick'])
 
-const variantClass = computed(() => `button--${variant}`)
+const variantClass = computed(() => `button--${variant} ${width}`)
 </script>
 
 <template>
@@ -26,7 +34,7 @@ const variantClass = computed(() => `button--${variant}`)
     v-if="!isLink"
     class="button"
     :class="variantClass"
-    type="button"
+    :type="type"
     @click="emit('handleClick')"
   >
     <slot name="start"></slot>
@@ -44,11 +52,11 @@ const variantClass = computed(() => `button--${variant}`)
 .button
     border-radius: 3px
     height: 42px
-    width: fit-content
     padding: 0.5rem 1rem
     display: flex
     align-items: center
     gap: 0.5rem
+    justify-content: center
 
     &--light
         border: solid 1px var(--clr-light-grey)
@@ -58,4 +66,10 @@ const variantClass = computed(() => `button--${variant}`)
         border: solid 1px var(--clr-black)
         background: var(--clr-black)
         color: white
+
+    &.fit
+      width: fit-content
+
+    &.full
+      width: 100%
 </style>

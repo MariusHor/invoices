@@ -90,5 +90,5 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 
       button
         width: 100%
-        padding: 0.5rem 0
+        height: 42px
 </style>

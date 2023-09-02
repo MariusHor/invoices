@@ -78,9 +78,10 @@ const {
   &__input
         border-radius: 5px
         border: 2px solid transparent
-        padding: 1rem 0.875rem
+        padding: 0 0.875rem
         outline: none
         background-color: var(--clr-light-grey)
+        height: 42px
         width: 100%
 
         &:focus

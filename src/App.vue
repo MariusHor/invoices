@@ -4,16 +4,13 @@ import NavBar from '@/components/NavBar.vue'
 
 <template>
   <NavBar />
-  <main class="container">
+  <main class="flex-column">
     <router-view></router-view>
   </main>
 </template>
 
-<style scoped lang="sass">
-main
-  padding: 3rem
-  max-width: 55rem
-  height: 100%
+<style lang="sass">
+.flex-column
   display: flex
   flex-direction: column
 </style>

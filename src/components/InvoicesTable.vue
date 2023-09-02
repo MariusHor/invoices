@@ -23,7 +23,7 @@ function toggleExpandInvoice(id) {
 </script>
 
 <template>
-  <div class="table-wrapper">
+  <div class="table-wrapper flex-column">
     <table aria-label="Table of invoices">
       <thead>
         <tr>
@@ -69,8 +69,6 @@ function toggleExpandInvoice(id) {
 .table-wrapper
   width: fit-content
   height: 100%
-  display: flex
-  flex-direction: column
   justify-content: space-between
 
 table
