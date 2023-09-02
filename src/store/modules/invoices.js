@@ -22,7 +22,11 @@ const state = {
   ]
 }
 
-const getters = {}
+const getters = {
+  getCurrentPageInvoices: (state) => (startIndex, endIndex) => {
+    return state.items.slice(startIndex.value, endIndex.value)
+  }
+}
 
 const mutations = {
   setCurrentSortingOption: (state, option) => {

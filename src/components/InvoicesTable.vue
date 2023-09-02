@@ -13,7 +13,9 @@ const invoices = computed(() => store.state.invoices.items)
 const startIndex = computed(() => currentPage.value * MAX_INV_PER_PAGE)
 const endIndex = computed(() => startIndex.value + MAX_INV_PER_PAGE)
 const hasNextPage = computed(() => endIndex.value < invoices.value.length)
-const currentPageInvoices = computed(() => invoices.value.slice(startIndex.value, endIndex.value))
+const currentPageInvoices = computed(() =>
+  store.getters['invoices/getCurrentPageInvoices'](startIndex, endIndex)
+)
 
 function toggleExpandInvoice(id) {
   invoiceToExpandId.value = invoiceToExpandId.value === id ? null : id
