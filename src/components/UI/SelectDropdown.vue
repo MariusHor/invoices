@@ -1,17 +1,22 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import { SORTING_OPTIONS } from '@/helpers'
-import { DROPDOWN_STATES } from '../helpers'
+import { DROPDOWN_STATES } from '@/helpers'
+
+const { options, currentSelectedOption } = defineProps({
+  options: Array,
+  currentSelectedOption: String
+})
+
+const emit = defineEmits(['setCurrentSelectedOption'])
 
 const target = ref(null)
-const currentSortingValue = ref(SORTING_OPTIONS[0])
 const currentDropdownState = ref(DROPDOWN_STATES[0])
 
 const selectIconClass = computed(() => `select__icon--${currentDropdownState.value}`)
 
-function handleSortingOption(option) {
-  currentSortingValue.value = option
+function selectCurrentValue(option) {
+  emit('setCurrentSelectedOption', option)
   currentDropdownState.value = DROPDOWN_STATES[0]
 }
 
@@ -26,7 +31,7 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 <template>
   <div ref="target">
     <button class="select" @click="handleCurrentState">
-      {{ currentSortingValue }}
+      {{ currentSelectedOption }}
       <img
         src="/select-arrow.svg"
         width="16"
@@ -38,11 +43,11 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
     </button>
     <ul v-if="currentDropdownState === DROPDOWN_STATES[1]" class="select__list">
       <li
-        v-for="option in SORTING_OPTIONS"
+        v-for="option in options"
         :key="option"
-        :class="{ active: option === currentSortingValue }"
+        :class="{ active: option === currentSelectedOption }"
       >
-        <button @click="handleSortingOption(option)">
+        <button @click="selectCurrentValue(option)">
           {{ option }}
         </button>
       </li>

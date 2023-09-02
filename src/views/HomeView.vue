@@ -1,7 +1,7 @@
 <script setup>
 import InvoicesTable from '@/components/InvoicesTable.vue'
-import IconButton from '@/components/IconButton.vue'
-import SelectDropdown from '@/components/SelectDropdown.vue'
+import SelectSorting from '@/components/SelectSorting.vue'
+import { IconButton } from '@/components/UI'
 import { Icon } from '@iconify/vue'
 </script>
 
@@ -9,7 +9,7 @@ import { Icon } from '@iconify/vue'
   <h1 class="section-header">Facturi</h1>
   <div class="section-content">
     <div class="section-actions">
-      <SelectDropdown />
+      <SelectSorting />
       <IconButton :text="'Adauga'" variant="dark">
         <template #start>
           <Icon icon="octicon:plus-16" width="24" />
