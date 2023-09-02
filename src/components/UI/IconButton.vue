@@ -16,11 +16,19 @@ const { text, variant, isLink, to } = defineProps({
   to: String
 })
 
+const emit = defineEmits(['handleClick'])
+
 const variantClass = computed(() => `button--${variant}`)
 </script>
 
 <template>
-  <button v-if="!isLink" class="button" :class="variantClass">
+  <button
+    v-if="!isLink"
+    class="button"
+    :class="variantClass"
+    type="button"
+    @click="emit('handleClick')"
+  >
     <slot name="start"></slot>
     {{ text }}
     <slot name="end"></slot>
@@ -35,6 +43,8 @@ const variantClass = computed(() => `button--${variant}`)
 <style scoped lang="sass">
 .button
     border-radius: 3px
+    height: 42px
+    width: fit-content
     padding: 0.5rem 1rem
     display: flex
     align-items: center

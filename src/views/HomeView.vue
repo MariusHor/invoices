@@ -5,7 +5,7 @@ import { Icon } from '@iconify/vue'
 </script>
 
 <template>
-  <AppLayout :headerText="'Facturi'">
+  <AppLayout :headerText="'Facturi'" :hasNavigateBackBtn="false">
     <template #content>
       <div class="section-actions">
         <SelectSorting />

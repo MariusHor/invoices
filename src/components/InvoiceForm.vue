@@ -11,7 +11,7 @@ const schema = Yup.object().shape({
 </script>
 
 <template>
-  <Form :validation-schema="schema" @submit="onSubmit" class="form">
+  <Form :validation-schema="schema" class="form">
     <div>
       <h2>Detalii client</h2>
       <div class="form__client-name">
