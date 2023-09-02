@@ -1,10 +1,12 @@
+import { SORTING_OPTIONS, compareStringDates } from '@/helpers'
+
 const state = {
-  currentSortingOption: 'Cele mai noi',
+  currentSortingOption: SORTING_OPTIONS[0],
   items: [
     {
       id: 'VI35426',
       client: 'Alexander Jones',
-      date: '25.10.2022',
+      date: '25.08.2023',
       total: 250,
       status: 'done',
       description:
@@ -24,7 +26,18 @@ const state = {
 
 const getters = {
   getCurrentPageInvoices: (state) => (startIndex, endIndex) => {
-    return state.items.slice(startIndex.value, endIndex.value)
+    const sortingOption = state.currentSortingOption
+
+    switch (sortingOption) {
+      case SORTING_OPTIONS[1]:
+        return state.items
+          .sort((a, b) => compareStringDates(a.date, b.date))
+          .slice(startIndex.value, endIndex.value)
+      default:
+        return state.items
+          .sort((a, b) => compareStringDates(b.date, a.date))
+          .slice(startIndex.value, endIndex.value)
+    }
   }
 }
 
