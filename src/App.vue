@@ -1,15 +1,22 @@
 <script setup>
-import NavBar from '@/components/NavBar.vue'
+import { LogoMain } from '@/components/_UI'
 </script>
 
 <template>
-  <NavBar />
+  <nav class="navbar">
+    <div class="container">
+      <LogoMain />
+    </div>
+  </nav>
   <main class="flex-column">
     <router-view></router-view>
   </main>
 </template>
 
 <style lang="sass">
+.navbar
+    border-bottom: solid 1px var(--clr-light-grey)
+
 label
   margin-bottom: 4px
 

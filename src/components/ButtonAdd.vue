@@ -1,6 +1,7 @@
 <script setup>
 import { Icon } from '@iconify/vue'
-import { IconButton } from './_UI'
+import { ButtonIcon } from './_UI'
+
 defineProps({
   variant: {
     type: String,
@@ -20,7 +21,7 @@ const emit = defineEmits(['handleClick'])
 </script>
 
 <template>
-  <IconButton
+  <ButtonIcon
     :text="'Adauga'"
     :variant="variant"
     :isLink="isLink"
@@ -31,5 +32,5 @@ const emit = defineEmits(['handleClick'])
     <template #start>
       <Icon icon="octicon:plus-16" width="24" />
     </template>
-  </IconButton>
+  </ButtonIcon>
 </template>

@@ -1,8 +1,8 @@
 <script setup>
 import '@vuepic/vue-datepicker/dist/main.css'
-import VueDatePicker from '@vuepic/vue-datepicker'
 import { ref } from 'vue'
-import { FormField } from './_UI'
+import VueDatePicker from '@vuepic/vue-datepicker'
+import FormField from './FormField.vue'
 
 const date = ref(new Date())
 </script>

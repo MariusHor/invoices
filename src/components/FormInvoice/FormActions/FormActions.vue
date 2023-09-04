@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { IconButton } from '@/components/_UI'
+import { ButtonIcon } from '@/components/_UI'
 
 const router = useRouter()
 
@@ -13,15 +13,15 @@ function handleInvoiceDiscard() {
 <template>
   <div class="form__actions flex-column">
     <div>
-      <IconButton :text="'Draft'" :variant="'light'" :width="'full'" />
-      <IconButton
+      <ButtonIcon :text="'Draft'" :variant="'light'" :width="'full'" />
+      <ButtonIcon
         :text="'Renunta'"
         :variant="'light'"
         :width="'full'"
         @handleClick="handleInvoiceDiscard"
       />
     </div>
-    <IconButton :text="'Salveaza'" :variant="'dark'" :width="'full'" :type="'submit'" />
+    <ButtonIcon :text="'Salveaza'" :variant="'dark'" :width="'full'" :type="'submit'" />
   </div>
 </template>
 
