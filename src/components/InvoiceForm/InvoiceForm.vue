@@ -9,6 +9,7 @@ import DatePicker from './DatePicker.vue'
 import ButtonAdd from './ButtonAdd.vue'
 import { INVOICE_STATE_OPTIONS, INVOICE_UNITS } from '@/helpers'
 import { invoiceValidationSchema } from '@/schemas'
+import FormSection from './FormSection/FormSection.vue'
 
 const articles = ref(Array.from({ length: 1 }))
 const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
@@ -21,71 +22,74 @@ const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
     @submit="() => console.log('submitted')"
   >
     <div class="form__left-pane flex-column">
-      <div>
-        <h2>Detalii client</h2>
-        <div class="grid-group">
+      <FormSection :header-text="'Detalii client'">
+        <template #gridGroup>
           <FormField :name="'firstName'" :label="'Prenume'" />
           <FormField :name="'lastName'" :label="'Nume'" />
-        </div>
-        <FormField :name="'email'" :label="'Email'" :type="'email'" />
-      </div>
-      <div>
-        <h2>Articole</h2>
-        <ul>
-          <li v-for="(article, index) in articles" :key="index" class="article">
-            <button @click="articles.pop()" :disabled="articles.length === 1">
-              <Icon icon="mdi:bin" width="24" />
-            </button>
-            <FormField :name="'article'" :label="'Articol'" />
-            <div class="article__unit flex-column">
-              <label>Unitate</label>
-              <SelectDropdown
-                :opt-class="'max-w-9'"
-                :options="INVOICE_UNITS"
-                :current-selected-option="INVOICE_UNITS[0]"
-                @setCurrentSelectedOption="(option) => (currentInvoiceState = option)"
-              />
-            </div>
-            <FormField :name="'unit-price'" :label="'Pret unitar'" />
-            <FormField :name="'quantity'" :label="'Cantitate'" />
-            <div class="article__total-price flex-column">
-              <label>Total</label>
-              <span>$0.00</span>
-            </div>
-          </li>
-        </ul>
-        <ButtonAdd
-          :isLink="false"
-          @handleClick="() => articles.push(null)"
-          :variant="'light'"
-          :disabled="articles.length === 3"
-        />
-      </div>
+        </template>
+        <template>
+          <FormField :name="'email'" :label="'Email'" :type="'email'" />
+        </template>
+      </FormSection>
+      <FormSection :header-text="'Articole'" :has-grid-group="false">
+        <template>
+          <ul>
+            <li v-for="(article, index) in articles" :key="index" class="article">
+              <button @click="articles.pop()" :disabled="articles.length === 1">
+                <Icon icon="mdi:bin" width="24" />
+              </button>
+              <FormField :name="'article'" :label="'Articol'" />
+              <div class="article__unit flex-column">
+                <label>Unitate</label>
+                <SelectDropdown
+                  :opt-class="'max-w-9'"
+                  :options="INVOICE_UNITS"
+                  :current-selected-option="INVOICE_UNITS[0]"
+                  @setCurrentSelectedOption="(option) => (currentInvoiceState = option)"
+                />
+              </div>
+              <FormField :name="'unit-price'" :label="'Pret unitar'" />
+              <FormField :name="'quantity'" :label="'Cantitate'" />
+              <div class="article__total-price flex-column">
+                <label>Total</label>
+                <span>$0.00</span>
+              </div>
+            </li>
+          </ul>
+          <ButtonAdd
+            :isLink="false"
+            @handleClick="() => articles.push(null)"
+            :variant="'light'"
+            :disabled="articles.length === 3"
+          />
+        </template>
+      </FormSection>
     </div>
     <div class="form__right-pane flex-column">
-      <div>
-        <h2>Detalii factura</h2>
-        <div class="grid-group">
+      <FormSection :header-text="'Detalii factura'">
+        <template #gridGroup>
           <FormField :name="'id'" :label="'Id'" :placeholder="'Ex: #VI2452'" />
           <DatePicker />
-        </div>
-        <div class="form__invoice-notes flex-column">
-          <FormTextarea
-            :name="'notes'"
-            :label="'Note'"
-            :placeholder="'Lasa o notita despre factura...'"
-          />
-        </div>
-        <div class="form__invoice-status flex-column">
-          <label>Status</label>
-          <SelectDropdown
-            :opt-class="'max-w-9'"
-            :options="INVOICE_STATE_OPTIONS"
-            :current-selected-option="currentInvoiceState"
-            @setCurrentSelectedOption="(option) => (currentInvoiceState = option)"
-          />
-        </div>
-      </div>
+        </template>
+        <template>
+          <div class="form__invoice-notes flex-column">
+            <FormTextarea
+              :name="'notes'"
+              :label="'Note'"
+              :placeholder="'Lasa o notita despre factura...'"
+            />
+          </div>
+          <div class="form__invoice-status flex-column">
+            <label>Status</label>
+            <SelectDropdown
+              :opt-class="'max-w-9'"
+              :options="INVOICE_STATE_OPTIONS"
+              :current-selected-option="currentInvoiceState"
+              @setCurrentSelectedOption="(option) => (currentInvoiceState = option)"
+            />
+          </div>
+        </template>
+      </FormSection>
       <FormActions />
     </div>
   </Form>
