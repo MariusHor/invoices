@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { toRef } from 'vue'
 import { useField } from 'vee-validate'
 
@@ -31,7 +31,12 @@ const props = defineProps({
 
 const name = toRef(props, 'name')
 
-const { errorMessage, handleChange, meta } = useField(name, undefined, {
+const {
+  value: formValue,
+  errorMessage,
+  handleChange,
+  meta
+} = useField(name, undefined, {
   initialValue: props.value
 })
 </script>
@@ -44,7 +49,7 @@ const { errorMessage, handleChange, meta } = useField(name, undefined, {
       :name="name"
       :id="name"
       :type="type"
-      :value="value"
+      :value="formValue || value"
       :placeholder="placeholder"
       @input="handleChange"
     />
