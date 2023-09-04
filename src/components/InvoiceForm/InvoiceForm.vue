@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from 'vue'
 import { Form, Field } from 'vee-validate'
-import { FormField, IconButton, SelectDropdown } from './UI'
+import { Icon } from '@iconify/vue'
+
+import { FormField, SelectDropdown } from './UI'
+import FormActions from './FormActions/FormActions.vue'
 import DatePicker from './DatePicker.vue'
 import ButtonAdd from './ButtonAdd.vue'
 import { INVOICE_STATE_OPTIONS, INVOICE_UNITS } from '@/helpers'
 import { invoiceValidationSchema } from '@/schemas'
-import { Icon } from '@iconify/vue'
 
 const articles = ref(Array.from({ length: 1 }))
 const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
@@ -87,18 +89,7 @@ const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
           />
         </div>
       </div>
-      <div class="form__actions flex-column">
-        <div>
-          <IconButton :text="'Draft'" :variant="'light'" :width="'full'" />
-          <IconButton
-            :text="'Renunta'"
-            :variant="'light'"
-            :width="'full'"
-            @handleClick="$router.back()"
-          />
-        </div>
-        <IconButton :text="'Salveaza'" :variant="'dark'" :width="'full'" :type="'submit'" />
-      </div>
+      <FormActions />
     </div>
   </Form>
 </template>
