@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import { Form, Field } from 'vee-validate'
+import { Form } from 'vee-validate'
 import { Icon } from '@iconify/vue'
 
-import { FormField, SelectDropdown } from './UI'
+import { FormField, FormTextarea, SelectDropdown } from './UI'
 import FormActions from './FormActions/FormActions.vue'
 import DatePicker from './DatePicker.vue'
 import ButtonAdd from './ButtonAdd.vue'
@@ -70,14 +70,11 @@ const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
           <DatePicker />
         </div>
         <div class="form__invoice-notes flex-column">
-          <Field v-slot="{ field }" name="notes">
-            <label for="notes">Note</label>
-            <textarea
-              v-bind="field"
-              id="notes"
-              placeholder="Lasa o notita despre factura..."
-            ></textarea>
-          </Field>
+          <FormTextarea
+            :name="'notes'"
+            :label="'Note'"
+            :placeholder="'Lasa o notita despre factura...'"
+          />
         </div>
         <div class="form__invoice-status flex-column">
           <label>Status</label>
