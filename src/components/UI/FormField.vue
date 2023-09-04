@@ -31,13 +31,7 @@ const props = defineProps({
 
 const name = toRef(props, 'name')
 
-const {
-  value: inputValue,
-  errorMessage,
-  handleBlur,
-  handleChange,
-  meta
-} = useField(name, undefined, {
+const { errorMessage, handleChange, meta } = useField(name, undefined, {
   initialValue: props.value
 })
 </script>
@@ -50,10 +44,9 @@ const {
       :name="name"
       :id="name"
       :type="type"
-      :value="inputValue"
+      :value="value"
       :placeholder="placeholder"
       @input="handleChange"
-      @blur="handleBlur"
     />
 
     <p class="field__error-message" v-show="errorMessage || meta.valid">

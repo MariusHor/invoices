@@ -21,6 +21,10 @@ const { text, variant, isLink, to, width, type } = defineProps({
     type: String,
     default: 'button'
   },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
   to: String
 })
 
@@ -35,6 +39,7 @@ const variantClass = computed(() => `button--${variant} ${width}`)
     class="button"
     :class="variantClass"
     :type="type"
+    :disabled="disabled"
     @click="emit('handleClick')"
   >
     <slot name="start"></slot>

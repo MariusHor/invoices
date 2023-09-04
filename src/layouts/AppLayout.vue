@@ -1,5 +1,5 @@
 <script setup>
-import { IconButton } from '@/components'
+import { ButtonNavigateBack } from '@/components'
 
 defineProps({
   headerText: String,
@@ -13,7 +13,7 @@ defineProps({
 <template>
   <div class="section-header flex-column">
     <h1>{{ headerText }}</h1>
-    <IconButton v-if="hasNavigateBackBtn" @handleClick="$router.back()" :text="'Inapoi'" />
+    <ButtonNavigateBack v-if="hasNavigateBackBtn" />
   </div>
   <div class="section-content flex-column">
     <slot name="content"></slot>

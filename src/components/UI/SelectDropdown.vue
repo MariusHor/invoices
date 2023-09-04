@@ -5,7 +5,8 @@ import { DROPDOWN_STATES } from '@/helpers'
 
 const { options, currentSelectedOption } = defineProps({
   options: Array,
-  currentSelectedOption: String
+  currentSelectedOption: String,
+  optClass: String
 })
 
 const emit = defineEmits(['setCurrentSelectedOption'])
@@ -29,8 +30,8 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 </script>
 
 <template>
-  <div ref="target">
-    <button class="select" @click="handleCurrentState">
+  <div ref="target" class="select" :class="optClass">
+    <button class="select__btn" @click="handleCurrentState">
       {{ currentSelectedOption }}
       <img
         src="/select-arrow.svg"
@@ -56,39 +57,37 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 </template>
 
 <style scoped lang="sass">
-.active
-    background: var(--clr-light-grey)
 .select
-    position: relative
-    background: transparent
-    border: 1px solid var(--clr-light-grey)
-    border-radius: 4px
-    width: 10rem
-    max-width: 160px
-    height: 42px
-    padding: 0 1rem
-    display: flex
-    justify-content: space-between
-    align-items: center
-    font-weight: bold
-
-    &__icon
-      &--open
-        transform: rotate(180deg)
-
-    &__list
-      background: var(--clr-white)
-      margin-top: 0.5rem
-      position: absolute
+  width: 100%
+  position: relative
+  &__btn
+      background: transparent
       border: 1px solid var(--clr-light-grey)
       border-radius: 4px
       width: 100%
-      max-width: 160px
+      height: 42px
+      padding: 0 1rem
+      display: flex
+      justify-content: space-between
+      align-items: center
+      font-weight: bold
 
-      li:not(:last-child)
-        border-bottom: solid 1px var(--clr-light-grey)
+  &__icon
+    &--open
+      transform: rotate(180deg)
 
-      button
-        width: 100%
-        height: 42px
+  &__list
+    background: var(--clr-white)
+    margin-top: 0.5rem
+    position: absolute
+    border: 1px solid var(--clr-light-grey)
+    border-radius: 4px
+    width: 100%
+
+    li:not(:last-child)
+      border-bottom: solid 1px var(--clr-light-grey)
+
+    button
+      width: 100%
+      height: 42px
 </style>

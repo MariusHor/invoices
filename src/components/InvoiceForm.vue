@@ -1,37 +1,71 @@
 <script setup>
 import { ref } from 'vue'
 import { Form, Field } from 'vee-validate'
-import * as Yup from 'yup'
 import { FormField, IconButton, SelectDropdown } from './UI'
-import { INVOICE_STATE_OPTIONS } from '@/helpers'
+import DatePicker from './DatePicker.vue'
+import ButtonAdd from './ButtonAdd.vue'
+import { INVOICE_STATE_OPTIONS, INVOICE_UNITS } from '@/helpers'
+import { invoiceValidationSchema } from '@/schemas'
+import { Icon } from '@iconify/vue'
 
+const articles = ref(Array.from({ length: 1 }))
 const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
-
-const schema = Yup.object().shape({
-  firstName: Yup.string().required('Prenumele este obligatoriu'),
-  lastName: Yup.string().required('Numele este obligatoriu'),
-  email: Yup.string().email().required('Emailul este obligatoriu'),
-  id: Yup.string().required('Id-ul este obligatoriu'),
-  notes: Yup.string()
-})
 </script>
 
 <template>
-  <Form :validation-schema="schema" class="form" @submit="() => console.log('submitted')">
-    <div class="form__client-details">
-      <h2>Detalii client</h2>
-      <div class="grid-group">
-        <FormField :name="'firstName'" :label="'Prenume'" />
-        <FormField :name="'lastName'" :label="'Nume'" />
+  <Form
+    :validation-schema="invoiceValidationSchema"
+    class="form"
+    @submit="() => console.log('submitted')"
+  >
+    <div class="form__left-pane flex-column">
+      <div>
+        <h2>Detalii client</h2>
+        <div class="grid-group">
+          <FormField :name="'firstName'" :label="'Prenume'" />
+          <FormField :name="'lastName'" :label="'Nume'" />
+        </div>
+        <FormField :name="'email'" :label="'Email'" :type="'email'" />
       </div>
-      <FormField :name="'email'" :label="'Email'" :type="'email'" />
+      <div>
+        <h2>Articole</h2>
+        <ul>
+          <li v-for="(article, index) in articles" :key="index" class="article">
+            <button @click="articles.pop()" :disabled="articles.length === 1">
+              <Icon icon="mdi:bin" width="24" />
+            </button>
+            <FormField :name="'article'" :label="'Articol'" />
+            <div class="article__unit flex-column">
+              <label>Unitate</label>
+              <SelectDropdown
+                :opt-class="'max-w-9'"
+                :options="INVOICE_UNITS"
+                :current-selected-option="INVOICE_UNITS[0]"
+                @setCurrentSelectedOption="(option) => (currentInvoiceState = option)"
+              />
+            </div>
+            <FormField :name="'unit-price'" :label="'Pret unitar'" />
+            <FormField :name="'quantity'" :label="'Cantitate'" />
+            <div class="article__total-price flex-column">
+              <label>Total</label>
+              <span>$0.00</span>
+            </div>
+          </li>
+        </ul>
+        <ButtonAdd
+          :isLink="false"
+          @handleClick="() => articles.push(null)"
+          :variant="'light'"
+          :disabled="articles.length === 3"
+        />
+      </div>
     </div>
-    <div class="form__invoice-details flex-column">
+    <div class="form__right-pane flex-column">
       <div>
         <h2>Detalii factura</h2>
         <div class="grid-group">
           <FormField :name="'id'" :label="'Id'" :placeholder="'Ex: #VI2452'" />
-          <FormField :name="'data'" :label="'Data'" />
+          <DatePicker />
         </div>
         <div class="form__invoice-notes flex-column">
           <Field v-slot="{ field }" name="notes">
@@ -46,6 +80,7 @@ const schema = Yup.object().shape({
         <div class="form__invoice-status flex-column">
           <label>Status</label>
           <SelectDropdown
+            :opt-class="'max-w-9'"
             :options="INVOICE_STATE_OPTIONS"
             :current-selected-option="currentInvoiceState"
             @setCurrentSelectedOption="(option) => (currentInvoiceState = option)"
@@ -90,9 +125,12 @@ label
     grid-template-columns: 3fr 2fr
     gap: 2rem
     height: 100%
-    max-height: 35rem
+    max-height: 37.25rem
 
-    &__invoice-details
+    &__left-pane
+        gap: 2rem
+
+    &__right-pane
         justify-content: space-between
 
     &__invoice-status
@@ -107,4 +145,18 @@ label
         div
             display: flex
             gap: 1rem
+
+.article
+  display: flex
+  gap: 1rem
+
+  &__unit
+    min-width: 78px
+
+  &__total-price
+    span
+      height: 42px
+      display: flex
+      justify-content: center
+      align-items: center
 </style>

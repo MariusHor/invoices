@@ -1,19 +1,14 @@
 <script setup>
-import { InvoicesTable, SelectSorting, IconButton } from '@/components'
+import { InvoicesTable, SelectSorting, ButtonAdd } from '@/components'
 import { AppLayout } from '@/layouts'
-import { Icon } from '@iconify/vue'
 </script>
 
 <template>
   <AppLayout :headerText="'Facturi'" :hasNavigateBackBtn="false">
     <template #content>
       <div class="section-actions">
-        <SelectSorting />
-        <IconButton :text="'Adauga'" variant="dark" :isLink="true" :to="'/invoices/create'">
-          <template #start>
-            <Icon icon="octicon:plus-16" width="24" />
-          </template>
-        </IconButton>
+        <SelectSorting :optClass="'max-w-10'" />
+        <ButtonAdd :variant="'dark'" />
       </div>
       <InvoicesTable />
     </template>
