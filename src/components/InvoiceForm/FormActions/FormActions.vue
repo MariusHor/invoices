@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { IconButton } from './UI'
+import { IconButton } from '@/components/_UI'
 
 const router = useRouter()
 
@@ -24,3 +24,12 @@ function handleInvoiceDiscard() {
     <IconButton :text="'Salveaza'" :variant="'dark'" :width="'full'" :type="'submit'" />
   </div>
 </template>
+
+<style scoped lang="sass">
+.form__actions
+    gap: 1rem
+
+    div
+        display: flex
+        gap: 1rem
+</style>

@@ -10,6 +10,9 @@ import NavBar from '@/components/NavBar.vue'
 </template>
 
 <style lang="sass">
+label
+  margin-bottom: 4px
+
 .flex-column
   display: flex
   flex-direction: column
@@ -22,4 +25,8 @@ import NavBar from '@/components/NavBar.vue'
 
 .active
     background: var(--clr-light-grey)
+
+.col-group
+    display: flex
+    gap: 1rem
 </style>

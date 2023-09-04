@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { TABLE_HEADINGS, MAX_INV_PER_PAGE } from '@/helpers'
-import { PaginationControls } from './UI'
+import { PaginationControls } from './_UI'
 
 const store = useStore()
 

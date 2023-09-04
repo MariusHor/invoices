@@ -4,9 +4,8 @@ defineProps({
     type: String,
     required: true
   },
-  hasGridGroup: {
+  hasColGroup: {
     type: Boolean,
-    required: true,
     default: true
   }
 })
@@ -15,9 +14,9 @@ defineProps({
 <template>
   <div>
     <h2>{{ headerText }}</h2>
-    <div v-if="hasGridGroup" class="grid-group">
-      <slot name="gridGroup"></slot>
+    <div v-if="hasColGroup" class="col-group">
+      <slot name="colGroup"></slot>
     </div>
-    <slot></slot>
+    <slot name="end"></slot>
   </div>
 </template>

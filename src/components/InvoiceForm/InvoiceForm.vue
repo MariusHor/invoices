@@ -3,15 +3,15 @@ import { ref } from 'vue'
 import { Form } from 'vee-validate'
 import { Icon } from '@iconify/vue'
 
-import { FormField, FormTextarea, SelectDropdown } from './UI'
+import { FormField, FormTextarea, SelectDropdown } from '@/components/_UI'
 import FormActions from './FormActions/FormActions.vue'
-import DatePicker from './DatePicker.vue'
-import ButtonAdd from './ButtonAdd.vue'
+import DatePicker from '../DatePicker.vue'
+import ButtonAdd from '../ButtonAdd.vue'
 import { INVOICE_STATE_OPTIONS, INVOICE_UNITS } from '@/helpers'
 import { invoiceValidationSchema } from '@/schemas'
 import FormSection from './FormSection/FormSection.vue'
 
-const articles = ref(Array.from({ length: 1 }))
+const items = ref(Array.from({ length: 1 }))
 const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
 </script>
 
@@ -23,23 +23,23 @@ const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
   >
     <div class="form__left-pane flex-column">
       <FormSection :header-text="'Detalii client'">
-        <template #gridGroup>
+        <template #colGroup>
           <FormField :name="'firstName'" :label="'Prenume'" />
           <FormField :name="'lastName'" :label="'Nume'" />
         </template>
-        <template>
+        <template #end>
           <FormField :name="'email'" :label="'Email'" :type="'email'" />
         </template>
       </FormSection>
-      <FormSection :header-text="'Articole'" :has-grid-group="false">
-        <template>
+      <FormSection :header-text="'Articole'" :has-col-group="false">
+        <template #end>
           <ul>
-            <li v-for="(article, index) in articles" :key="index" class="article">
-              <button @click="articles.pop()" :disabled="articles.length === 1">
+            <li v-for="(item, index) in items" :key="index" class="item">
+              <button @click="items.pop()" :disabled="items.length === 1">
                 <Icon icon="mdi:bin" width="24" />
               </button>
-              <FormField :name="'article'" :label="'Articol'" />
-              <div class="article__unit flex-column">
+              <FormField :name="'item'" :label="'Articol'" />
+              <div class="item__unit flex-column">
                 <label>Unitate</label>
                 <SelectDropdown
                   :opt-class="'max-w-9'"
@@ -50,7 +50,7 @@ const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
               </div>
               <FormField :name="'unit-price'" :label="'Pret unitar'" />
               <FormField :name="'quantity'" :label="'Cantitate'" />
-              <div class="article__total-price flex-column">
+              <div class="item__total-price flex-column">
                 <label>Total</label>
                 <span>$0.00</span>
               </div>
@@ -58,20 +58,20 @@ const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
           </ul>
           <ButtonAdd
             :isLink="false"
-            @handleClick="() => articles.push(null)"
+            @handleClick="() => items.push(null)"
             :variant="'light'"
-            :disabled="articles.length === 3"
+            :disabled="items.length === 3"
           />
         </template>
       </FormSection>
     </div>
     <div class="form__right-pane flex-column">
       <FormSection :header-text="'Detalii factura'">
-        <template #gridGroup>
+        <template #colGroup>
           <FormField :name="'id'" :label="'Id'" :placeholder="'Ex: #VI2452'" />
           <DatePicker />
         </template>
-        <template>
+        <template #end>
           <div class="form__invoice-notes flex-column">
             <FormTextarea
               :name="'notes'"
@@ -96,22 +96,6 @@ const currentInvoiceState = ref(INVOICE_STATE_OPTIONS[0])
 </template>
 
 <style scoped lang="sass">
-textarea
-    border-radius: 5px
-    border: 2px solid transparent
-    padding: 0.875rem
-    outline: none
-    width: 100%
-    height: 10rem
-    background-color: var(--clr-light-grey)
-
-label
-    margin-bottom: 4px
-
-.grid-group
-    display: flex
-    gap: 1rem
-
 .form
     display: grid
     grid-template-columns: 3fr 2fr
@@ -131,14 +115,7 @@ label
     &__invoice-notes
         margin-bottom: 20px
 
-    &__actions
-        gap: 1rem
-
-        div
-            display: flex
-            gap: 1rem
-
-.article
+.item
   display: flex
   gap: 1rem
 
