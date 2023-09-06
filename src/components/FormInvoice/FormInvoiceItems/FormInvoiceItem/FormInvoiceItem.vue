@@ -1,17 +1,20 @@
 <script setup>
 import { Icon } from '@iconify/vue'
+import { computed } from 'vue'
 
 import { FormField } from '@/components/_UI'
 import DropdownItemUnits from '../DropdownItemUnits/DropdownItemUnits.vue'
 import FormFieldCurrency from '../../../_UI/FormFieldCurrency.vue'
 
-defineProps({
+const { fields, id } = defineProps({
   id: Number,
   name: String,
   fields: Array
 })
 
 defineEmits(['removeItem'])
+
+const itemTotal = computed(() => fields[id].value.price * fields[id].value.quantity ?? 0)
 </script>
 
 <template>
@@ -38,7 +41,7 @@ defineEmits(['removeItem'])
     />
     <div class="item__total-price flex-column">
       <label>Total</label>
-      <span>$0.00</span>
+      <span>${{ itemTotal }}</span>
     </div>
   </li>
 </template>

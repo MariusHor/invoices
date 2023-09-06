@@ -12,7 +12,12 @@ import ButtonAdd from '@/components/ButtonAdd.vue'
         :id="index"
         :name="`items[${index}]`"
         :fields="fields"
-        @removeItem="remove(index)"
+        @removeItem="
+          () => {
+            console.log(field.value)
+            remove(index)
+          }
+        "
       />
     </fieldset>
     <ButtonAdd
