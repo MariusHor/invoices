@@ -1,14 +1,14 @@
 <script setup>
 import { FieldArray } from 'vee-validate'
-import FormInvoiceItem from './FormInvoiceItem/FormInvoiceItem.vue'
+import FormItem from './FormItem/FormItem.vue'
 import ButtonAdd from '@/components/ButtonAdd.vue'
-import { INVOICE_UNITS } from '@/helpers'
+import { INVOICE_UNITS_OPTIONS } from '@/helpers'
 </script>
 
 <template>
   <FieldArray name="items" v-slot="{ fields, push, remove }">
     <fieldset class="InputGroup" v-for="(field, index) in fields" :key="field.key">
-      <FormInvoiceItem
+      <FormItem
         :key="index"
         :id="index"
         :name="`items[${index}]`"
@@ -18,7 +18,9 @@ import { INVOICE_UNITS } from '@/helpers'
     </fieldset>
     <ButtonAdd
       :isLink="false"
-      @handleClick="() => push({ description: '', price: '', quantity: 0, unit: INVOICE_UNITS[0] })"
+      @handleClick="
+        () => push({ description: '', price: '', quantity: 0, unit: INVOICE_UNITS_OPTIONS[0] })
+      "
       :variant="'light'"
       :disabled="fields.length === 3"
     />

@@ -5,7 +5,7 @@ import { computed } from 'vue'
 import { FormField } from '@/components/_UI'
 import FormFieldCurrency from '../../../_UI/FormFieldCurrency.vue'
 import DropdownForm from '../../DropdownForm/DropdownForm.vue'
-import { INVOICE_UNITS } from '@/helpers'
+import { INVOICE_UNITS_OPTIONS } from '@/helpers'
 
 const { fields, id } = defineProps({
   id: Number,
@@ -26,7 +26,7 @@ const itemTotal = computed(() => fields[id].value.price * fields[id].value.quant
     <FormField :id="`description_${id}`" :name="`${name}.description`" :label="'Articol'" />
     <div class="item__unit flex-column">
       <label>Unitate</label>
-      <DropdownForm :name="`${name}.unit`" :options="INVOICE_UNITS" />
+      <DropdownForm :name="`${name}.unit`" :options="INVOICE_UNITS_OPTIONS" />
     </div>
     <FormFieldCurrency
       :id="`price_${id}`"
