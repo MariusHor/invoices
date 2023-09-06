@@ -4,6 +4,7 @@ import { onClickOutside } from '@vueuse/core'
 import { DROPDOWN_STATES } from '@/helpers'
 
 const { options, currentSelectedOption } = defineProps({
+  name: String,
   options: Array,
   currentSelectedOption: String,
   optClass: String
@@ -31,17 +32,20 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 
 <template>
   <div ref="target" class="select" :class="optClass">
-    <button class="select__btn" @click="handleCurrentState">
-      {{ currentSelectedOption }}
-      <img
-        src="/select-arrow.svg"
-        width="16"
-        height="16"
-        alt=""
-        class="select__icon"
-        :class="selectIconClass"
-      />
-    </button>
+    <input
+      class="select__input"
+      @click="handleCurrentState"
+      :value="currentSelectedOption"
+      :name="name"
+    />
+    <img
+      src="/select-arrow.svg"
+      width="16"
+      height="16"
+      alt=""
+      class="select__icon"
+      :class="selectIconClass"
+    />
     <ul v-if="currentDropdownState === DROPDOWN_STATES[1]" class="select__list">
       <li
         v-for="option in options"
@@ -60,7 +64,8 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 .select
   width: 100%
   position: relative
-  &__btn
+  &__input
+      position: relative
       background: transparent
       border: 1px solid var(--clr-light-grey)
       border-radius: 4px
@@ -71,8 +76,16 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
       justify-content: space-between
       align-items: center
       font-weight: bold
+      cursor: pointer
+      caret-color: transparent
 
   &__icon
+    position: absolute
+    top: 50%
+    translate: 0 -50%
+    right: 1rem
+    pointer-events: none
+
     &--open
       transform: rotate(180deg)
 

@@ -2,6 +2,7 @@
 import { FieldArray } from 'vee-validate'
 import FormInvoiceItem from './FormInvoiceItem/FormInvoiceItem.vue'
 import ButtonAdd from '@/components/ButtonAdd.vue'
+import { INVOICE_UNITS } from '@/helpers'
 </script>
 
 <template>
@@ -12,17 +13,12 @@ import ButtonAdd from '@/components/ButtonAdd.vue'
         :id="index"
         :name="`items[${index}]`"
         :fields="fields"
-        @removeItem="
-          () => {
-            console.log(field.value)
-            remove(index)
-          }
-        "
+        @removeItem="remove(index)"
       />
     </fieldset>
     <ButtonAdd
       :isLink="false"
-      @handleClick="() => push({ description: '', price: '', quantity: 0 })"
+      @handleClick="() => push({ description: '', price: '', quantity: 0, unit: INVOICE_UNITS[0] })"
       :variant="'light'"
       :disabled="fields.length === 3"
     />

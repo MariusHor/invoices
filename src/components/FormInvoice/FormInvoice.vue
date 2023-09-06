@@ -2,11 +2,12 @@
 import { Form } from 'vee-validate'
 
 import { FormField, FormTextarea, DatePicker } from '@/components/_UI'
-import DropdownInvoiceState from './DropdownInvoiceState/DropdownInvoiceState.vue'
-import FormInvoiceItems from './FormInvoiceItems/FormInvoiceItems.vue'
+import FormItems from './FormItems/FormItems.vue'
 import FormSection from './FormSection/FormSection.vue'
 import FormActions from './FormActions/FormActions.vue'
 import { invoiceValidationSchema } from '@/schemas'
+import { INVOICE_STATUS_OPTIONS } from '@/helpers'
+import DropdownForm from './DropdownForm/DropdownForm.vue'
 </script>
 
 <template>
@@ -27,7 +28,7 @@ import { invoiceValidationSchema } from '@/schemas'
       </FormSection>
       <FormSection :header-text="'Articole'" :has-col-group="false">
         <template #end>
-          <FormInvoiceItems />
+          <FormItems />
         </template>
       </FormSection>
     </div>
@@ -47,7 +48,11 @@ import { invoiceValidationSchema } from '@/schemas'
           </div>
           <div class="form__invoice-status flex-column">
             <label>Status</label>
-            <DropdownInvoiceState />
+            <DropdownForm
+              :name="'status'"
+              :initial-value="INVOICE_STATUS_OPTIONS[0]"
+              :options="INVOICE_STATUS_OPTIONS"
+            />
           </div>
         </template>
       </FormSection>
