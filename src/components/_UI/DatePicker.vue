@@ -15,7 +15,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <VueDatePicker v-model="date">
+  <VueDatePicker v-model="date" :enable-time-picker="false">
     <template #dp-input="{ value }">
       <FormField :name="'date'" :label="'Data'" id="datePicker" :handles-date="true">
         <template #dateInput>
