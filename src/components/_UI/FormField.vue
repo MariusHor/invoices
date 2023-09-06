@@ -19,14 +19,23 @@ const props = defineProps({
     type: String,
     required: true
   },
-  successMessage: {
-    type: String,
-    default: ''
-  },
   placeholder: {
     type: String,
     default: ''
-  }
+  },
+  id: {
+    type: String,
+    required: true
+  },
+  handlesCurrency: {
+    type: Boolean,
+    default: false
+  },
+  handlesDate: {
+    type: Boolean,
+    default: false
+  },
+  errorMessageProp: String
 })
 
 const name = toRef(props, 'name')
@@ -34,33 +43,34 @@ const name = toRef(props, 'name')
 const {
   value: formValue,
   errorMessage,
-  handleChange,
-  meta
+  handleChange
 } = useField(name, undefined, {
   initialValue: props.value
 })
 </script>
 
 <template>
-  <div class="field" :class="{ 'has-error': !!errorMessage, success: meta.valid }">
-    <label class="field__label" :for="name">{{ label }}</label>
+  <div class="field" :class="{ 'has-error': !!errorMessage }">
+    <label class="field__label" :for="id">{{ label }}</label>
     <input
+      v-if="!handlesCurrency && !handlesDate"
       class="field__input"
       :name="name"
-      :id="name"
+      :id="id"
       :type="type"
-      :value="formValue || value"
+      :value="formValue"
       :placeholder="placeholder"
       @input="handleChange"
     />
-
-    <p class="field__error-message" v-show="errorMessage || meta.valid">
-      {{ errorMessage || successMessage }}
+    <slot v-if="handlesCurrency" name="currencyInput"></slot>
+    <slot v-if="handlesDate" name="dateInput"></slot>
+    <p class="field__error-message" v-show="errorMessageProp || errorMessage">
+      {{ errorMessage }}
     </p>
   </div>
 </template>
 
-<style scoped lang="sass">
+<style lang="sass">
 .field
   position: relative
   margin-bottom: 1.25rem

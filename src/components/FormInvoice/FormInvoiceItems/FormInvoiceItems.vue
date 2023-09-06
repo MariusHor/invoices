@@ -1,24 +1,25 @@
 <script setup>
-import { ref } from 'vue'
+import { FieldArray } from 'vee-validate'
 import FormInvoiceItem from './FormInvoiceItem/FormInvoiceItem.vue'
 import ButtonAdd from '@/components/ButtonAdd.vue'
-
-const items = ref(Array.from({ length: 1 }))
 </script>
 
 <template>
-  <ul>
-    <FormInvoiceItem
-      :items="items"
-      v-for="(item, index) in items"
-      :key="index"
-      @removeItem="items.pop()"
+  <FieldArray name="items" v-slot="{ fields, push, remove }">
+    <fieldset class="InputGroup" v-for="(field, index) in fields" :key="field.key">
+      <FormInvoiceItem
+        :key="index"
+        :id="index"
+        :name="`items[${index}]`"
+        :fields="fields"
+        @removeItem="remove(index)"
+      />
+    </fieldset>
+    <ButtonAdd
+      :isLink="false"
+      @handleClick="() => push({ description: '', price: '', quantity: 0 })"
+      :variant="'light'"
+      :disabled="fields.length === 3"
     />
-  </ul>
-  <ButtonAdd
-    :isLink="false"
-    @handleClick="() => items.push(null)"
-    :variant="'light'"
-    :disabled="items.length === 3"
-  />
+  </FieldArray>
 </template>

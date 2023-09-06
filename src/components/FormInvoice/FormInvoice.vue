@@ -13,16 +13,16 @@ import { invoiceValidationSchema } from '@/schemas'
   <Form
     :validation-schema="invoiceValidationSchema"
     class="form"
-    @submit="() => console.log('submitted')"
+    @submit="(values) => console.log(values)"
   >
     <div class="form__left-pane flex-column">
       <FormSection :header-text="'Detalii client'">
         <template #colGroup>
-          <FormField :name="'firstName'" :label="'Prenume'" />
-          <FormField :name="'lastName'" :label="'Nume'" />
+          <FormField :name="'client.firstName'" :label="'Prenume'" id="firstName" />
+          <FormField :name="'client.lastName'" :label="'Nume'" id="lastName" />
         </template>
         <template #end>
-          <FormField :name="'email'" :label="'Email'" :type="'email'" />
+          <FormField :name="'client.email'" :label="'Email'" :type="'email'" id="email" />
         </template>
       </FormSection>
       <FormSection :header-text="'Articole'" :has-col-group="false">
@@ -34,7 +34,7 @@ import { invoiceValidationSchema } from '@/schemas'
     <div class="form__right-pane flex-column">
       <FormSection :header-text="'Detalii factura'">
         <template #colGroup>
-          <FormField :name="'id'" :label="'Id'" :placeholder="'Ex: #VI2452'" />
+          <FormField :name="'id'" :label="'Id'" :placeholder="'Ex: #VI2452'" id="invoiceId" />
           <DatePicker />
         </template>
         <template #end>

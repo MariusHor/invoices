@@ -3,9 +3,12 @@ import { Icon } from '@iconify/vue'
 
 import { FormField } from '@/components/_UI'
 import DropdownItemUnits from '../DropdownItemUnits/DropdownItemUnits.vue'
+import FormFieldCurrency from '../../../_UI/FormFieldCurrency.vue'
 
 defineProps({
-  items: Array
+  id: Number,
+  name: String,
+  fields: Array
 })
 
 defineEmits(['removeItem'])
@@ -13,16 +16,26 @@ defineEmits(['removeItem'])
 
 <template>
   <li class="item">
-    <button @click="$emit('removeItem')" :disabled="items.length === 1">
+    <button @click="$emit('removeItem')" :disabled="fields.length === 1">
       <Icon icon="mdi:bin" width="24" />
     </button>
-    <FormField :name="'item'" :label="'Articol'" />
+    <FormField :id="`description_${id}`" :name="`${name}.description`" :label="'Articol'" />
     <div class="item__unit flex-column">
       <label>Unitate</label>
       <DropdownItemUnits />
     </div>
-    <FormField :name="'unit-price'" :label="'Pret unitar'" />
-    <FormField :name="'quantity'" :label="'Cantitate'" />
+    <FormFieldCurrency
+      :id="`price_${id}`"
+      :name="`${name}.price`"
+      :label="'Pret unitar'"
+      :options="{ currency: 'USD' }"
+    />
+    <FormField
+      :id="`quantity_${id}`"
+      :name="`${name}.quantity`"
+      :label="'Cantitate'"
+      :type="'number'"
+    />
     <div class="item__total-price flex-column">
       <label>Total</label>
       <span>$0.00</span>
