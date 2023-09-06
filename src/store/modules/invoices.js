@@ -5,20 +5,28 @@ const state = {
   items: [
     {
       id: 'VI35426',
-      client: 'Alexander Jones',
+      client: {
+        firstName: 'Alexander',
+        lastName: 'Stone',
+        email: 'alexander.stone@gmail.com'
+      },
       date: '25.08.2023',
       total: 250,
       status: 'done',
-      description:
+      notes:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
       id: 'VI83226',
-      client: 'David Milner',
+      client: {
+        firstName: 'David',
+        lastName: 'Milner',
+        email: 'david.milner@gmail.com'
+      },
       date: '02.04.2023',
       total: 220,
       status: 'pending',
-      description:
+      notes:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     }
   ]

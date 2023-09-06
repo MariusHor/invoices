@@ -5,7 +5,7 @@ import { computed } from 'vue'
 import { FormField } from '@/components/_UI'
 import FormFieldCurrency from '../../../_UI/FormFieldCurrency.vue'
 import DropdownForm from '../../DropdownForm/DropdownForm.vue'
-import { INVOICE_UNITS_OPTIONS } from '@/helpers'
+import { INVOICE_UNITS_OPTIONS, DEFAULT_CURRENCY } from '@/helpers'
 
 const { fields, id } = defineProps({
   id: Number,
@@ -42,7 +42,7 @@ const itemTotal = computed(() => fields[id].value.price * fields[id].value.quant
     />
     <div class="item__total-price flex-column">
       <label>Total</label>
-      <span>${{ itemTotal }}</span>
+      <span>{{ DEFAULT_CURRENCY }}{{ itemTotal }}</span>
     </div>
   </li>
 </template>
