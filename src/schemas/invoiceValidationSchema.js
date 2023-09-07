@@ -1,24 +1,26 @@
 import * as Yup from 'yup'
 
+const FIELD_REQUIRED = 'Camp obligatoriu'
+const FIELD_NUMBER = 'Doar numere'
+const FIELD_POSITIVE = 'Camp obligatoriu de tip numar pozitiv'
+
 export const invoiceValidationSchema = Yup.object().shape({
   client: Yup.object().shape({
-    firstName: Yup.string().required('Prenumele este obligatoriu'),
-    lastName: Yup.string().required('Numele este obligatoriu'),
-    email: Yup.string().email().required('Emailul este obligatoriu')
+    firstName: Yup.string().required(FIELD_REQUIRED),
+    lastName: Yup.string().required(FIELD_REQUIRED),
+    email: Yup.string().email().required(FIELD_REQUIRED),
+    phone: Yup.number().typeError(FIELD_NUMBER).integer().required(FIELD_REQUIRED)
   }),
-  id: Yup.string().required('Id-ul este obligatoriu'),
+  description: Yup.string().required(FIELD_REQUIRED),
   items: Yup.array().of(
     Yup.object().shape({
-      description: Yup.string().required('Name is required'),
+      title: Yup.string().required(FIELD_REQUIRED),
       price: Yup.number()
-        .positive('Must be a positive number')
-        .required('Price is required')
-        .typeError('Must be a number'),
-      quantity: Yup.number()
-        .positive('Must be a positive number')
-        .typeError('Must be a number')
-        .required('Qty. is required')
-        .integer()
+        .required(FIELD_REQUIRED)
+        .positive(FIELD_POSITIVE)
+        .required(FIELD_REQUIRED)
+        .typeError(FIELD_NUMBER),
+      quantity: Yup.number().required(FIELD_REQUIRED).typeError(FIELD_NUMBER).integer()
     })
   )
 })

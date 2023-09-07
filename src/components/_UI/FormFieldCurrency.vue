@@ -13,10 +13,7 @@ const { name, options } = defineProps({
     type: String,
     required: true
   },
-  label: {
-    type: String,
-    required: true
-  },
+
   placeholder: {
     type: String,
     default: ''
@@ -25,10 +22,11 @@ const { name, options } = defineProps({
     type: String,
     required: true
   },
-  options: Object
+  options: Object,
+  label: String
 })
 
-const { formattedValue, numberValue, inputRef, setValue } = useCurrencyInput(options)
+const { formattedValue, numberValue, inputRef, setValue, setOptions } = useCurrencyInput(options)
 const { errorMessage, handleChange, value } = useField(name)
 
 onMounted(() => {
@@ -40,8 +38,11 @@ onMounted(() => {
 })
 
 watch(numberValue, (newValue) => {
-  console.log(newValue)
   handleChange(newValue)
+})
+
+watch(options, (newValue) => {
+  setOptions(newValue)
 })
 </script>
 

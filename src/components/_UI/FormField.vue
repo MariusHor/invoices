@@ -15,10 +15,6 @@ const props = defineProps({
     type: String,
     required: true
   },
-  label: {
-    type: String,
-    required: true
-  },
   placeholder: {
     type: String,
     default: ''
@@ -26,6 +22,10 @@ const props = defineProps({
   id: {
     type: String,
     required: true
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   },
   handlesCurrency: {
     type: Boolean,
@@ -35,6 +35,12 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  isTextArea: {
+    type: Boolean,
+    default: false
+  },
+  min: Number,
+  label: String,
   errorMessageProp: String
 })
 
@@ -53,15 +59,23 @@ const {
   <div class="field" :class="{ 'has-error': !!errorMessage }">
     <label class="field__label" :for="id">{{ label }}</label>
     <input
-      v-if="!handlesCurrency && !handlesDate"
+      v-if="!handlesCurrency && !handlesDate && !isTextArea"
       class="field__input"
       :name="name"
       :id="id"
       :type="type"
       :value="formValue"
       :placeholder="placeholder"
+      :disabled="disabled"
+      :min="min"
       @input="handleChange"
     />
+    <textarea
+      v-if="isTextArea"
+      :id="name"
+      :placeholder="placeholder"
+      @input="handleChange"
+    ></textarea>
     <slot v-if="handlesCurrency" name="currencyInput"></slot>
     <slot v-if="handlesDate" name="dateInput"></slot>
     <p class="field__error-message" v-show="errorMessageProp || errorMessage">
@@ -71,6 +85,16 @@ const {
 </template>
 
 <style lang="sass">
+textarea
+  position: relative
+  border-radius: 5px
+  border: 2px solid transparent
+  padding: 0.875rem
+  outline: none
+  width: 100%
+  height: 10rem
+  background-color: var(--clr-light-grey)
+
 .field
   position: relative
   margin-bottom: 1.25rem
@@ -97,6 +121,5 @@ const {
 
   &__label
     display: block
-    margin-bottom: 4px
     width: 100%
 </style>

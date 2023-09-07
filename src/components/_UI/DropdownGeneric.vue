@@ -63,6 +63,7 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 <style scoped lang="sass">
 .select
   width: 100%
+  height: fit-content
   position: relative
   &__input
       position: relative
@@ -96,6 +97,7 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
     border: 1px solid var(--clr-light-grey)
     border-radius: 4px
     width: 100%
+    z-index: 1
 
     li:not(:last-child)
       border-bottom: solid 1px var(--clr-light-grey)

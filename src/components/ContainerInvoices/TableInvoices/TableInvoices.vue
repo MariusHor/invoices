@@ -32,15 +32,15 @@ function toggleExpandInvoice(id) {
             </button>
           </td>
           <template v-for="key in Object.keys(invoice)" :key="key">
-            <td width="150" v-if="key !== 'notes'">
+            <td width="150" v-if="key !== 'description'">
               {{ invoice[key] }}
             </td>
           </template>
         </tr>
         <tr v-if="invoiceToExpandId === invoice.id">
           <td colspan="6">
-            <span>Note</span>
-            <p>{{ invoice['notes'] }}</p>
+            <span>Descriere</span>
+            <p>{{ invoice['description'] }}</p>
           </td>
         </tr>
       </template>

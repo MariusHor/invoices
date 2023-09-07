@@ -73,3 +73,15 @@ button {
   background: transparent;
   border: none;
 }
+
+button:disabled {
+  cursor: initial;
+}
+
+fieldset {
+  border: none;
+}
+
+label {
+  margin: 0;
+}

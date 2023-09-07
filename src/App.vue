@@ -17,9 +17,6 @@ import { LogoMain } from '@/components/_UI'
 .navbar
     border-bottom: solid 1px var(--clr-light-grey)
 
-label
-  margin-bottom: 4px
-
 .flex-column
   display: flex
   flex-direction: column
@@ -34,6 +31,7 @@ label
     background: var(--clr-light-grey)
 
 .col-group
-    display: flex
+    display: grid
+    grid-template-columns: 1fr 1fr
     gap: 1rem
 </style>

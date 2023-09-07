@@ -19,3 +19,7 @@ function parseDateString(dateString) {
 export function formatName(string) {
   return string.slice(0, 1).toUpperCase() + string.slice(1)
 }
+
+export function removeCurrency(string) {
+  return parseFloat(string.split(' ')[1])
+}

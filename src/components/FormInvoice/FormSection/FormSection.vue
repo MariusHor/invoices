@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <div>
+  <div class="form__section flex-column">
     <h2>{{ headerText }}</h2>
     <div v-if="hasColGroup" class="col-group">
       <slot name="colGroup"></slot>
@@ -20,3 +20,8 @@ defineProps({
     <slot name="end"></slot>
   </div>
 </template>
+
+<style scoped lang="sass">
+.form__section
+  height: 100%
+</style>

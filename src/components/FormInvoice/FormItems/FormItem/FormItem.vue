@@ -1,11 +1,13 @@
 <script setup>
 import { Icon } from '@iconify/vue'
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
-import { FormField } from '@/components/_UI'
-import FormFieldCurrency from '../../../_UI/FormFieldCurrency.vue'
+import { FormField, FormFieldCurrency } from '@/components/_UI'
 import DropdownForm from '../../DropdownForm/DropdownForm.vue'
-import { INVOICE_UNITS_OPTIONS, DEFAULT_CURRENCY } from '@/helpers'
+import { INVOICE_UNITS_OPTIONS } from '@/helpers'
+
+const store = useStore()
 
 const { fields, id } = defineProps({
   id: Number,
@@ -15,50 +17,44 @@ const { fields, id } = defineProps({
 
 defineEmits(['removeItem'])
 
-const itemTotal = computed(() => fields[id].value.price * fields[id].value.quantity ?? 0)
+const currency = computed(() => store.state.invoices.activeCurrency)
+const options = ref({ currency, autoDecimalDigits: true })
+const itemTotal = computed(() =>
+  typeof fields[id].value.price === 'number'
+    ? fields[id].value.price * fields[id].value.quantity
+    : 0
+)
 </script>
 
 <template>
-  <li class="item">
-    <button @click="$emit('removeItem')" :disabled="fields.length === 1">
-      <Icon icon="mdi:bin" width="24" />
-    </button>
-    <FormField :id="`description_${id}`" :name="`${name}.description`" :label="'Articol'" />
-    <div class="item__unit flex-column">
-      <label>Unitate</label>
-      <DropdownForm :name="`${name}.unit`" :options="INVOICE_UNITS_OPTIONS" />
-    </div>
-    <FormFieldCurrency
-      :id="`price_${id}`"
-      :name="`${name}.price`"
-      :label="'Pret unitar'"
-      :options="{ currency: 'USD' }"
-    />
-    <FormField
-      :id="`quantity_${id}`"
-      :name="`${name}.quantity`"
-      :label="'Cantitate'"
-      :type="'number'"
-    />
-    <div class="item__total-price flex-column">
-      <label>Total</label>
-      <span>{{ DEFAULT_CURRENCY }}{{ itemTotal }}</span>
-    </div>
-  </li>
+  <button @click="$emit('removeItem')" :disabled="fields.length === 1" class="item__col">
+    <Icon icon="mdi:bin" width="24" />
+  </button>
+  <FormField :id="`title_${id}`" :name="`${name}.title`" :placeholder="'Articol'" />
+  <DropdownForm :name="`${name}.unit`" :options="INVOICE_UNITS_OPTIONS" />
+  <FormFieldCurrency
+    :id="`price_${id}`"
+    :name="`${name}.price`"
+    :placeholder="'Pret unitar'"
+    :options="options"
+  />
+  <div class="col-wrapper">
+    <FormField :id="`quantity_${id}`" :name="`${name}.quantity`" :type="'number'" :min="1" />
+  </div>
+  <span class="item__col">{{ $store.state.invoices.activeCurrency }} {{ itemTotal }}</span>
 </template>
 
 <style scoped lang="sass">
-.item
+.item__col
+  height: 42px
   display: flex
-  gap: 1rem
+  align-items: center
+  justify-content: center
 
-  &__unit
-    min-width: 78px
+.col-wrapper
+  width: 100%
+  max-width: 70px
 
-  &__total-price
-    span
-      height: 42px
-      display: flex
-      justify-content: center
-      align-items: center
+span
+  min-width: 80px
 </style>

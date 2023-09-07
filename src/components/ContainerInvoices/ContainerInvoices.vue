@@ -42,7 +42,6 @@ const currentPageInvoices = computed(() =>
   align-items: center
 
 .table-wrapper
-  width: fit-content
   height: 100%
   display: flex
   flex-direction: column

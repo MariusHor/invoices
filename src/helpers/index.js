@@ -5,7 +5,7 @@ export {
   MAX_INV_PER_PAGE,
   INVOICE_STATUS_OPTIONS,
   INVOICE_UNITS_OPTIONS,
-  DEFAULT_CURRENCY,
+  INVOICE_CURRENCY_OPTIONS,
   FORM_INITIAL_DATA
 } from './constants'
-export { compareStringDates, formatStringDate, formatName } from './utils'
+export { compareStringDates, formatStringDate, formatName, removeCurrency } from './utils'
