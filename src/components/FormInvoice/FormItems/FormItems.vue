@@ -7,7 +7,7 @@ import { INVOICE_UNITS_OPTIONS } from '@/helpers'
 
 <template>
   <FieldArray name="items" v-slot="{ fields, push, remove }">
-    <fieldset class="InputGroup" v-for="(field, index) in fields" :key="field.key">
+    <fieldset v-for="(field, index) in fields" :key="field.key">
       <FormItem
         :key="index"
         :id="index"

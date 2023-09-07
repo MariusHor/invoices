@@ -6,13 +6,35 @@ import FormItems from './FormItems/FormItems.vue'
 import FormSection from './FormSection/FormSection.vue'
 import FormActions from './FormActions/FormActions.vue'
 import { invoiceValidationSchema } from '@/schemas'
-import { INVOICE_STATUS_OPTIONS } from '@/helpers'
+import { INVOICE_STATUS_OPTIONS, INVOICE_UNITS_OPTIONS } from '@/helpers'
 import DropdownForm from './DropdownForm/DropdownForm.vue'
+
+const initialData = {
+  client: {
+    firstName: '',
+    lastName: '',
+    email: ''
+  },
+  items: [
+    {
+      description: '',
+      price: '',
+      quantity: 0,
+      unit: INVOICE_UNITS_OPTIONS[0]
+    }
+  ],
+  id: '',
+  date: '',
+  total: 0,
+  status: 'done',
+  notes: ''
+}
 </script>
 
 <template>
   <Form
     :validation-schema="invoiceValidationSchema"
+    :initial-values="initialData"
     class="form"
     @submit="(values) => console.log(values)"
   >
