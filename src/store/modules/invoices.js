@@ -1,52 +1,39 @@
-import { SORTING_OPTIONS, compareStringDates } from '@/helpers'
+import {
+  SORTING_OPTIONS,
+  DEFAULT_CURRENCY,
+  compareStringDates,
+  formatStringDate,
+  formatName
+} from '@/helpers'
 
 const state = {
   currentSortingOption: SORTING_OPTIONS[0],
-  items: [
-    {
-      id: 'VI35426',
-      client: {
-        firstName: 'Alexander',
-        lastName: 'Stone',
-        email: 'alexander.stone@gmail.com'
-      },
-      date: '25.08.2023',
-      total: 250,
-      status: 'done',
-      notes:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      id: 'VI83226',
-      client: {
-        firstName: 'David',
-        lastName: 'Milner',
-        email: 'david.milner@gmail.com'
-      },
-      date: '02.04.2023',
-      total: 220,
-      status: 'pending',
-      notes:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    }
-  ]
+  items: []
 }
 
 const getters = {
   getCurrentPageInvoices: (state) => (startIndex, endIndex) => {
     const sortingOption = state.currentSortingOption
+    const invoices = state.items.map((invoice) => ({
+      id: invoice.id,
+      client: `${invoice.client.firstName} ${invoice.client.lastName}`,
+      date: formatStringDate(invoice.date),
+      total: `${DEFAULT_CURRENCY} ${invoice.total}`,
+      status: invoice.status,
+      notes: invoice.notes
+    }))
 
     switch (sortingOption) {
       case SORTING_OPTIONS[1]:
-        return state.items
+        return invoices
           .sort((a, b) => compareStringDates(a.date, b.date))
           .slice(startIndex.value, endIndex.value)
       case SORTING_OPTIONS[2]:
-        return state.items.sort((a, b) => b.total - a.total).slice(startIndex.value, endIndex.value)
+        return invoices.sort((a, b) => b.total - a.total).slice(startIndex.value, endIndex.value)
       case SORTING_OPTIONS[3]:
-        return state.items.sort((a, b) => a.total - b.total).slice(startIndex.value, endIndex.value)
+        return invoices.sort((a, b) => a.total - b.total).slice(startIndex.value, endIndex.value)
       default:
-        return state.items
+        return invoices
           .sort((a, b) => compareStringDates(b.date, a.date))
           .slice(startIndex.value, endIndex.value)
     }
@@ -56,6 +43,19 @@ const getters = {
 const mutations = {
   setCurrentSortingOption: (state, option) => {
     state.currentSortingOption = option
+  },
+  addInvoice: (state, invoice) => {
+    state.items.push({
+      ...invoice,
+      total: invoice.items.reduce((acc, curr) => {
+        return acc + curr.price * curr.quantity
+      }, 0),
+      client: {
+        ...invoice.client,
+        firstName: formatName(invoice.client.firstName),
+        lastName: formatName(invoice.client.lastName)
+      }
+    })
   }
 }
 

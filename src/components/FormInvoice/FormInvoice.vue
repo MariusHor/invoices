@@ -1,42 +1,49 @@
 <script setup>
 import { Form } from 'vee-validate'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 import { FormField, FormTextarea, DatePicker } from '@/components/_UI'
 import FormItems from './FormItems/FormItems.vue'
 import FormSection from './FormSection/FormSection.vue'
 import FormActions from './FormActions/FormActions.vue'
 import { invoiceValidationSchema } from '@/schemas'
-import { INVOICE_STATUS_OPTIONS, INVOICE_UNITS_OPTIONS } from '@/helpers'
+import { INVOICE_STATUS_OPTIONS, FORM_INITIAL_DATA } from '@/helpers'
 import DropdownForm from './DropdownForm/DropdownForm.vue'
 
-const initialData = {
-  client: {
-    firstName: '',
-    lastName: '',
-    email: ''
+const { isEditing } = defineProps({
+  initialValues: {
+    type: Object,
+    default: FORM_INITIAL_DATA
   },
-  items: [
-    {
-      description: '',
-      price: '',
-      quantity: 0,
-      unit: INVOICE_UNITS_OPTIONS[0]
-    }
-  ],
-  id: '',
-  date: '',
-  total: 0,
-  status: 'done',
-  notes: ''
+  isEditing: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const router = useRouter()
+const store = useStore()
+
+function submitForm(values) {
+  if (!isEditing) {
+    store.commit('invoices/addInvoice', values)
+    router.push({ path: '/' })
+  }
+
+  if (isEditing) {
+    console.log(values)
+    // store.commit('invoices/editInvoice', values)
+  }
 }
 </script>
 
 <template>
   <Form
     :validation-schema="invoiceValidationSchema"
-    :initial-values="initialData"
+    :initial-values="FORM_INITIAL_DATA"
     class="form"
-    @submit="(values) => console.log(values)"
+    @submit="submitForm"
   >
     <div class="form__left-pane flex-column">
       <FormSection :header-text="'Detalii client'">
@@ -57,7 +64,7 @@ const initialData = {
     <div class="form__right-pane flex-column">
       <FormSection :header-text="'Detalii factura'">
         <template #colGroup>
-          <FormField :name="'id'" :label="'Id'" :placeholder="'Ex: #VI2452'" id="invoiceId" />
+          <FormField :name="'id'" :label="'Id'" id="invoiceId" />
           <DatePicker />
         </template>
         <template #end>

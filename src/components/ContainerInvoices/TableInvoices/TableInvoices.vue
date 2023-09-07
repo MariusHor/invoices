@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { TABLE_HEADINGS, DEFAULT_CURRENCY } from '@/helpers'
+import { TABLE_HEADINGS } from '@/helpers'
 
-defineProps({
+const { currentPageInvoices } = defineProps({
   currentPageInvoices: Array
 })
 
@@ -32,11 +32,7 @@ function toggleExpandInvoice(id) {
             </button>
           </td>
           <template v-for="key in Object.keys(invoice)" :key="key">
-            <td width="150" v-if="key === 'total'">{{ DEFAULT_CURRENCY }} {{ invoice[key] }}</td>
-            <td width="150" v-if="key === 'client'">
-              {{ invoice[key].firstName }} {{ invoice[key].lastName }}
-            </td>
-            <td width="150" v-else-if="key !== 'notes' && key !== 'total'">
+            <td width="150" v-if="key !== 'notes'">
               {{ invoice[key] }}
             </td>
           </template>

@@ -5,3 +5,24 @@ export const INVOICE_UNITS_OPTIONS = ['Ore', 'Zile', 'Saptamani', 'Luni']
 export const DROPDOWN_STATES = ['closed', 'open']
 export const MAX_INV_PER_PAGE = 1
 export const DEFAULT_CURRENCY = '$'
+
+export const FORM_INITIAL_DATA = {
+  client: {
+    firstName: '',
+    lastName: '',
+    email: ''
+  },
+  items: [
+    {
+      description: '',
+      price: '',
+      quantity: 0,
+      unit: INVOICE_UNITS_OPTIONS[0]
+    }
+  ],
+  id: '',
+  date: '',
+  total: 0,
+  status: 'done',
+  notes: ''
+}
