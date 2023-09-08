@@ -7,21 +7,27 @@ defineProps({
   hasColGroup: {
     type: Boolean,
     default: true
+  },
+  height: {
+    type: String,
+    default: 'full'
   }
 })
 </script>
 
 <template>
-  <div class="form__section flex-column">
+  <section class="flex-column" :class="height">
     <h2>{{ headerText }}</h2>
     <div v-if="hasColGroup" class="col-group">
       <slot name="colGroup"></slot>
     </div>
     <slot name="end"></slot>
-  </div>
+  </section>
 </template>
 
 <style scoped lang="sass">
-.form__section
+.full
   height: 100%
+.fit
+  height: fit-content
 </style>

@@ -1,4 +1,5 @@
-export const TABLE_HEADINGS = ['Id', 'Client', 'Data', 'Total', 'Status', 'Actions']
+export const INVOICES_TABLE_HEADINGS = ['Id', 'Client', 'Data', 'Total', 'Status', 'Actiuni']
+export const ITEM_TABLE_HEADINGS = ['Articol', 'Unitate', 'Pret unitar', 'Cantitate', 'Total']
 export const DROPDOWN_STATES = ['closed', 'open']
 export const MAX_INV_PER_PAGE = 5
 

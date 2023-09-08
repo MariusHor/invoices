@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { TABLE_HEADINGS } from '@/helpers'
 import InvoiceActions from '../InvoiceActions/InvoiceActions.vue'
+import { INVOICES_TABLE_HEADINGS } from '@/helpers'
 
 const { currentPageInvoices } = defineProps({
   currentPageInvoices: Array
@@ -19,7 +19,7 @@ function toggleExpandInvoice(id) {
     <thead>
       <tr>
         <th width="80"></th>
-        <th scope="col" v-for="heading in TABLE_HEADINGS" :key="heading" width="150">
+        <th scope="col" v-for="heading in INVOICES_TABLE_HEADINGS" :key="heading" width="150">
           {{ heading }}
         </th>
       </tr>
@@ -42,7 +42,7 @@ function toggleExpandInvoice(id) {
           </td>
         </tr>
         <tr v-if="invoiceToExpandId === invoice.id">
-          <td colspan="6">
+          <td colspan="7">
             <span>Descriere</span>
             <p>{{ invoice['description'] }}</p>
           </td>

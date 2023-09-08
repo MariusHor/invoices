@@ -42,16 +42,23 @@ export function formatTotal(activeCurrency, totalCurrency, total) {
 export function formatInvoice(invoice, id) {
   return {
     ...invoice,
-    total: invoice.items
-      .reduce((acc, curr) => {
-        return acc + curr.price * curr.quantity
-      }, 0)
-      .toFixed(2),
     client: {
       ...invoice.client,
       firstName: formatName(invoice.client.firstName),
       lastName: formatName(invoice.client.lastName)
     },
+    items: invoice.items.map((item) => ({
+      title: item.title,
+      unit: item.unit,
+      price: item.price,
+      quantity: item.quantity,
+      total: item.price * item.quantity
+    })),
+    total: invoice.items
+      .reduce((acc, curr) => {
+        return acc + curr.price * curr.quantity
+      }, 0)
+      .toFixed(2),
     id
   }
 }

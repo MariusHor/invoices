@@ -18,7 +18,11 @@ const state = {
 
 const getters = {
   getInvoice: (state) => (id) => {
-    return state.items.find((invoice) => invoice.id === id)
+    const invoice = state.items.find((invoice) => invoice.id === id)
+    return {
+      ...invoice,
+      date: formatStringDate(invoice.date)
+    }
   },
   getCurrentPageInvoices: (state) => (startIndex, endIndex) => {
     const sortingOption = state.currentSortingOption
