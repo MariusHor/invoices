@@ -25,7 +25,7 @@ const emit = defineEmits(['handleClick'])
     :text="'Adauga'"
     :variant="variant"
     :isLink="isLink"
-    :to="'/invoices/create'"
+    :to="'/create'"
     :disabled="disabled"
     @handleClick="emit('handleClick')"
   >

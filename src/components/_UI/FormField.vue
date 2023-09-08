@@ -73,6 +73,7 @@ const {
     <textarea
       v-if="isTextArea"
       :id="name"
+      :value="formValue"
       :placeholder="placeholder"
       @input="handleChange"
     ></textarea>
