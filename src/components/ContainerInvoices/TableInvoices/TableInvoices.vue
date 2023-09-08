@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { ButtonIcon } from '@/components/_UI'
 import { TABLE_HEADINGS } from '@/helpers'
 
 const { currentPageInvoices } = defineProps({
@@ -36,6 +37,15 @@ function toggleExpandInvoice(id) {
               {{ invoice[key] }}
             </td>
           </template>
+          <td class="invoice-actions">
+            <ButtonIcon :text="'View'" :variant="'light-sm'" />
+            <ButtonIcon :text="'Edit'" :variant="'light-sm'" />
+            <ButtonIcon
+              :text="'Delete'"
+              :variant="'light-sm'"
+              @handleClick="() => $store.commit('invoices/removeInvoice', invoice.id)"
+            />
+          </td>
         </tr>
         <tr v-if="invoiceToExpandId === invoice.id">
           <td colspan="6">
@@ -69,4 +79,8 @@ td
     display: grid
     place-items: center
     margin: 0 auto
+
+.invoice-actions
+  display: flex
+  gap: 0.25rem
 </style>

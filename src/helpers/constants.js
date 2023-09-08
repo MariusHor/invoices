@@ -1,4 +1,4 @@
-export const TABLE_HEADINGS = ['Id', 'Client', 'Data', 'Total', 'Status']
+export const TABLE_HEADINGS = ['Id', 'Client', 'Data', 'Total', 'Status', 'Actions']
 export const DROPDOWN_STATES = ['closed', 'open']
 export const MAX_INV_PER_PAGE = 5
 

@@ -78,6 +78,9 @@ const mutations = {
       },
       id
     })
+  },
+  removeInvoice: (state, invoiceId) => {
+    state.items = state.items.filter((invoice) => invoice.id !== invoiceId)
   }
 }
 

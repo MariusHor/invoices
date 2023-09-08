@@ -7,7 +7,7 @@ const { text, variant, isLink, to, width, type } = defineProps({
   },
   variant: {
     type: String,
-    default: 'light'
+    default: 'light-md'
   },
   width: {
     type: String,
@@ -43,7 +43,7 @@ const variantClass = computed(() => `button--${variant} ${width}`)
     @click="emit('handleClick')"
   >
     <slot name="start"></slot>
-    {{ text }}
+    <span>{{ text }}</span>
     <slot name="end"></slot>
   </button>
   <router-link v-if="isLink" class="button" :class="variantClass" :to="to">
@@ -56,18 +56,22 @@ const variantClass = computed(() => `button--${variant} ${width}`)
 <style scoped lang="sass">
 .button
     border-radius: 3px
-    height: 42px
-    padding: 0.5rem 1rem
     display: flex
     align-items: center
     gap: 0.5rem
     justify-content: center
 
-    &--light
+    &--light-md, &--dark-md
+        padding: 0.5rem 1rem
+
+    &--light-sm, &--dark-sm
+        padding: 0.25rem 0.875rem
+
+    &--light-sm, &--light-md
         border: solid 1px var(--clr-light-grey)
         background: none
 
-    &--dark
+    &--dark-sm, &--dark-md
         border: solid 1px var(--clr-black)
         background: var(--clr-black)
         color: white
