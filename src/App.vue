@@ -21,6 +21,10 @@ import { LogoMain } from '@/components/_UI'
   display: flex
   flex-direction: column
 
+.flex-row
+  display: flex
+  flex-direction: row
+
 .max-w-10
   max-width: 10rem
 

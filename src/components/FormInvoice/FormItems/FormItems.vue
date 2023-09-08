@@ -3,6 +3,7 @@ import { FieldArray } from 'vee-validate'
 import FormItem from './FormItem/FormItem.vue'
 import ButtonAdd from '@/components/ButtonAdd.vue'
 import { INVOICE_UNITS_OPTIONS } from '@/helpers'
+import { InvoiceTotal } from '../..'
 </script>
 
 <template>
@@ -27,19 +28,13 @@ import { INVOICE_UNITS_OPTIONS } from '@/helpers'
           :disabled="fields.length === 3"
         />
       </div>
-      <p>
-        Total:
-        <span
-          >{{ $store.state.invoices.formCurrency }}
-          {{
-            fields
-              .reduce((acc, curr) => {
-                return acc + curr.value.price * curr.value.quantity
-              }, 0)
-              .toFixed(2)
-          }}</span
-        >
-      </p>
+      <InvoiceTotal
+        :align="'end'"
+        :currency="$store.state.invoices.formCurrency"
+        :total="
+          fields.reduce((acc, curr) => acc + curr.value.price * curr.value.quantity, 0).toFixed(2)
+        "
+      />
     </FieldArray>
   </div>
 </template>

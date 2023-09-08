@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { ButtonIcon } from '@/components/_UI'
-import { TABLE_HEADINGS } from '@/helpers'
+import InvoiceActions from '../InvoiceActions/InvoiceActions.vue'
+import { INVOICES_TABLE_HEADINGS } from '@/helpers'
 
 const { currentPageInvoices } = defineProps({
   currentPageInvoices: Array
@@ -19,7 +19,7 @@ function toggleExpandInvoice(id) {
     <thead>
       <tr>
         <th width="80"></th>
-        <th scope="col" v-for="heading in TABLE_HEADINGS" :key="heading" width="150">
+        <th scope="col" v-for="heading in INVOICES_TABLE_HEADINGS" :key="heading" width="150">
           {{ heading }}
         </th>
       </tr>
@@ -38,22 +38,11 @@ function toggleExpandInvoice(id) {
             </td>
           </template>
           <td class="invoice-actions">
-            <ButtonIcon :text="'View'" :variant="'light-sm'" :isLink="true" :to="''" />
-            <ButtonIcon
-              :text="'Edit'"
-              :variant="'light-sm'"
-              :isLink="true"
-              :to="`/${invoice.id}/edit`"
-            />
-            <ButtonIcon
-              :text="'Delete'"
-              :variant="'light-sm'"
-              @handleClick="() => $store.commit('invoices/removeInvoice', invoice.id)"
-            />
+            <InvoiceActions :id="invoice.id" />
           </td>
         </tr>
         <tr v-if="invoiceToExpandId === invoice.id">
-          <td colspan="6">
+          <td colspan="7">
             <span>Descriere</span>
             <p>{{ invoice['description'] }}</p>
           </td>

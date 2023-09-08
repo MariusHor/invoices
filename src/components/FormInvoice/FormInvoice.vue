@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 
 import { FormField, DatePicker } from '@/components/_UI'
 import FormItems from './FormItems/FormItems.vue'
-import FormSection from './FormSection/FormSection.vue'
+import { SectionLayout } from '@/components'
 import FormActions from './FormActions/FormActions.vue'
 import DropdownForm from './DropdownForm/DropdownForm.vue'
 import { INVOICE_STATUS_OPTIONS, FORM_INITIAL_DATA, INVOICE_CURRENCY_OPTIONS } from '@/helpers'
@@ -46,7 +46,7 @@ function submitForm(values) {
     @submit="submitForm"
   >
     <div class="form__left-pane">
-      <FormSection :header-text="'Detalii client'">
+      <SectionLayout :header-text="'Detalii client'">
         <template #colGroup>
           <FormField :name="'client.firstName'" :label="'Prenume'" id="firstName" />
           <FormField :name="'client.lastName'" :label="'Nume'" id="lastName" />
@@ -57,15 +57,15 @@ function submitForm(values) {
             <FormField :name="'client.phone'" :label="'Telefon'" :type="'phone'" id="phone" />
           </div>
         </template>
-      </FormSection>
-      <FormSection :header-text="'Articole'" :has-col-group="false">
+      </SectionLayout>
+      <SectionLayout :header-text="'Articole'" :has-col-group="false">
         <template #end>
           <FormItems />
         </template>
-      </FormSection>
+      </SectionLayout>
     </div>
     <div class="form__right-pane flex-column">
-      <FormSection :header-text="'Detalii factura'">
+      <SectionLayout :header-text="'Detalii factura'">
         <template #colGroup>
           <DropdownForm
             :label="'Status'"
@@ -90,7 +90,7 @@ function submitForm(values) {
             :label="'Descriere'"
           />
         </template>
-      </FormSection>
+      </SectionLayout>
       <FormActions :is-editing="isEditing" />
     </div>
   </Form>
