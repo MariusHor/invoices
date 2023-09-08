@@ -32,9 +32,11 @@ import { INVOICE_UNITS_OPTIONS } from '@/helpers'
         <span
           >{{ $store.state.invoices.activeCurrency }}
           {{
-            fields.reduce((acc, curr) => {
-              return acc + curr.value.price * curr.value.quantity
-            }, 0)
+            fields
+              .reduce((acc, curr) => {
+                return acc + curr.value.price * curr.value.quantity
+              }, 0)
+              .toFixed(2)
           }}</span
         >
       </p>

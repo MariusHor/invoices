@@ -23,3 +23,9 @@ export function formatName(string) {
 export function removeCurrency(string) {
   return parseFloat(string.split(' ')[1])
 }
+
+export function getInvoiceId(firstName, lastName, length) {
+  return `${firstName.slice(0, 1).toUpperCase()}${lastName.slice(0, 1).toUpperCase()}${crypto
+    .randomUUID()
+    .slice(0, length - 2)}`
+}

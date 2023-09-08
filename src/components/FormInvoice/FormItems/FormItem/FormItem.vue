@@ -41,7 +41,9 @@ const itemTotal = computed(() =>
   <div class="col-wrapper">
     <FormField :id="`quantity_${id}`" :name="`${name}.quantity`" :type="'number'" :min="1" />
   </div>
-  <span class="item__col">{{ $store.state.invoices.activeCurrency }} {{ itemTotal }}</span>
+  <span class="item__col"
+    >{{ $store.state.invoices.activeCurrency }} {{ itemTotal.toFixed(2) }}</span
+  >
 </template>
 
 <style scoped lang="sass">

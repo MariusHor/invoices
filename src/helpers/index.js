@@ -8,4 +8,10 @@ export {
   INVOICE_CURRENCY_OPTIONS,
   FORM_INITIAL_DATA
 } from './constants'
-export { compareStringDates, formatStringDate, formatName, removeCurrency } from './utils'
+export {
+  compareStringDates,
+  formatStringDate,
+  formatName,
+  removeCurrency,
+  getInvoiceId
+} from './utils'

@@ -4,7 +4,8 @@ import {
   compareStringDates,
   formatStringDate,
   formatName,
-  removeCurrency
+  removeCurrency,
+  getInvoiceId
 } from '@/helpers'
 
 const state = {
@@ -54,16 +55,21 @@ const mutations = {
     state.activeCurrency = value
   },
   addInvoice: (state, invoice) => {
+    const id = getInvoiceId(invoice.client.firstName, invoice.client.lastName, 7)
+
     state.items.push({
       ...invoice,
-      total: invoice.items.reduce((acc, curr) => {
-        return acc + curr.price * curr.quantity
-      }, 0),
+      total: invoice.items
+        .reduce((acc, curr) => {
+          return acc + curr.price * curr.quantity
+        }, 0)
+        .toFixed(2),
       client: {
         ...invoice.client,
         firstName: formatName(invoice.client.firstName),
         lastName: formatName(invoice.client.lastName)
-      }
+      },
+      id
     })
   }
 }
