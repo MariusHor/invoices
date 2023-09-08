@@ -33,7 +33,7 @@ export function getInvoiceId(firstName, lastName, length) {
 }
 
 export function formatTotal(activeCurrency, totalCurrency, total) {
-  const conversionRate = CONVERSION_RATES[`${activeCurrency}_${totalCurrency}`] || 1.0
+  const conversionRate = CONVERSION_RATES[`${activeCurrency}_${totalCurrency}`] ?? 1.0
   const convertedTotal = total * conversionRate
 
   return `${activeCurrency} ${convertedTotal.toFixed(2)}`

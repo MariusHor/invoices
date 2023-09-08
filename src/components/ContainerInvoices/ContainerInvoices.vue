@@ -27,7 +27,7 @@ const currentPageInvoices = computed(() =>
       <DropdownCurrency :optClass="'max-w-10'" :disabled="!currentPageInvoices.length" />
     </div>
 
-    <ButtonAdd :variant="'dark'" />
+    <ButtonAdd :variant="'dark-md'" />
   </div>
   <div class="table-wrapper flex-column">
     <TableInvoices :current-page-invoices="currentPageInvoices" />

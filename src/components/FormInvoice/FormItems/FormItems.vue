@@ -23,7 +23,7 @@ import { INVOICE_UNITS_OPTIONS } from '@/helpers'
           @handleClick="
             () => push({ title: '', price: '', quantity: 1, unit: INVOICE_UNITS_OPTIONS[0] })
           "
-          :variant="'light'"
+          :variant="'light-md'"
           :disabled="fields.length === 3"
         />
       </div>

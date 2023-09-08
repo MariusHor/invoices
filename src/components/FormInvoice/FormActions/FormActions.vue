@@ -13,15 +13,15 @@ function handleInvoiceDiscard() {
 <template>
   <div class="form__actions flex-column">
     <div>
-      <ButtonIcon :text="'Draft'" :variant="'light'" :width="'full'" />
+      <ButtonIcon :text="'Draft'" :variant="'light-md'" :width="'full'" />
       <ButtonIcon
         :text="'Renunta'"
-        :variant="'light'"
+        :variant="'light-md'"
         :width="'full'"
         @handleClick="handleInvoiceDiscard"
       />
     </div>
-    <ButtonIcon :text="'Salveaza'" :variant="'dark'" :width="'full'" :type="'submit'" />
+    <ButtonIcon :text="'Salveaza'" :variant="'dark-md'" :width="'full'" :type="'submit'" />
   </div>
 </template>
 
