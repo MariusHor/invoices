@@ -2,6 +2,12 @@
 import { useRouter } from 'vue-router'
 import { ButtonIcon } from '@/components/_UI'
 
+defineProps({
+  isEditing: {
+    type: Boolean,
+    default: false
+  }
+})
 const router = useRouter()
 
 function handleInvoiceDiscard() {
@@ -13,7 +19,7 @@ function handleInvoiceDiscard() {
 <template>
   <div class="form__actions flex-column">
     <div>
-      <ButtonIcon :text="'Draft'" :variant="'light-md'" :width="'full'" />
+      <ButtonIcon v-if="!isEditing" :text="'Draft'" :variant="'light-md'" :width="'full'" />
       <ButtonIcon
         :text="'Renunta'"
         :variant="'light-md'"
@@ -21,7 +27,12 @@ function handleInvoiceDiscard() {
         @handleClick="handleInvoiceDiscard"
       />
     </div>
-    <ButtonIcon :text="'Salveaza'" :variant="'dark-md'" :width="'full'" :type="'submit'" />
+    <ButtonIcon
+      :text="isEditing ? 'Editeaza' : 'Salveaza'"
+      :variant="'dark-md'"
+      :width="'full'"
+      :type="'submit'"
+    />
   </div>
 </template>
 

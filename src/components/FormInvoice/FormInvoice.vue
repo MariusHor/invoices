@@ -11,8 +11,8 @@ import DropdownForm from './DropdownForm/DropdownForm.vue'
 import { INVOICE_STATUS_OPTIONS, FORM_INITIAL_DATA, INVOICE_CURRENCY_OPTIONS } from '@/helpers'
 import { invoiceValidationSchema } from '@/schemas'
 
-const { isEditing } = defineProps({
-  initialValues: {
+const { isEditing, formValues } = defineProps({
+  formValues: {
     type: Object,
     default: FORM_INITIAL_DATA
   },
@@ -26,23 +26,22 @@ const router = useRouter()
 const store = useStore()
 
 function submitForm(values) {
-  console.log(values)
   if (!isEditing) {
     store.commit('invoices/addInvoice', values)
-    router.push({ path: '/' })
   }
 
   if (isEditing) {
-    console.log(values)
-    // store.commit('invoices/editInvoice', values)
+    store.commit('invoices/editInvoice', { values, id: formValues.id })
   }
+
+  router.push({ path: '/' })
 }
 </script>
 
 <template>
   <Form
     :validation-schema="invoiceValidationSchema"
-    :initial-values="FORM_INITIAL_DATA"
+    :initial-values="formValues"
     class="form"
     @submit="submitForm"
   >
@@ -92,7 +91,7 @@ function submitForm(values) {
           />
         </template>
       </FormSection>
-      <FormActions />
+      <FormActions :is-editing="isEditing" />
     </div>
   </Form>
 </template>

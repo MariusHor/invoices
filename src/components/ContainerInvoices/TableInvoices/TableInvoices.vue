@@ -39,7 +39,12 @@ function toggleExpandInvoice(id) {
           </template>
           <td class="invoice-actions">
             <ButtonIcon :text="'View'" :variant="'light-sm'" :isLink="true" :to="''" />
-            <ButtonIcon :text="'Edit'" :variant="'light-sm'" :isLink="true" :to="''" />
+            <ButtonIcon
+              :text="'Edit'"
+              :variant="'light-sm'"
+              :isLink="true"
+              :to="`/${invoice.id}/edit`"
+            />
             <ButtonIcon
               :text="'Delete'"
               :variant="'light-sm'"
