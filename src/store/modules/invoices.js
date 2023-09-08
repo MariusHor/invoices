@@ -3,7 +3,7 @@ import {
   INVOICE_CURRENCY_OPTIONS,
   compareStringDates,
   formatStringDate,
-  formatName,
+  formatInvoice,
   removeCurrency,
   getInvoiceId,
   formatTotal
@@ -66,24 +66,16 @@ const mutations = {
   },
   addInvoice: (state, invoice) => {
     const id = getInvoiceId(invoice.client.firstName, invoice.client.lastName, 7)
-
-    state.items.push({
-      ...invoice,
-      total: invoice.items
-        .reduce((acc, curr) => {
-          return acc + curr.price * curr.quantity
-        }, 0)
-        .toFixed(2),
-      client: {
-        ...invoice.client,
-        firstName: formatName(invoice.client.firstName),
-        lastName: formatName(invoice.client.lastName)
-      },
-      id
-    })
+    const newInvoice = formatInvoice(invoice, id)
+    state.items.push(newInvoice)
   },
   removeInvoice: (state, invoiceId) => {
     state.items = state.items.filter((invoice) => invoice.id !== invoiceId)
+  },
+  editInvoice: (state, { values, id }) => {
+    state.items = state.items.map((invoice) =>
+      invoice.id === id ? formatInvoice(values, id) : invoice
+    )
   }
 }
 

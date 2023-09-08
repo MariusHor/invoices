@@ -11,7 +11,7 @@ import DropdownForm from './DropdownForm/DropdownForm.vue'
 import { INVOICE_STATUS_OPTIONS, FORM_INITIAL_DATA, INVOICE_CURRENCY_OPTIONS } from '@/helpers'
 import { invoiceValidationSchema } from '@/schemas'
 
-const { isEditing } = defineProps({
+const { isEditing, formValues } = defineProps({
   formValues: {
     type: Object,
     default: FORM_INITIAL_DATA
@@ -28,12 +28,13 @@ const store = useStore()
 function submitForm(values) {
   if (!isEditing) {
     store.commit('invoices/addInvoice', values)
-    router.push({ path: '/' })
   }
 
   if (isEditing) {
-    // store.commit('invoices/editInvoice', values)
+    store.commit('invoices/editInvoice', { values, id: formValues.id })
   }
+
+  router.push({ path: '/' })
 }
 </script>
 

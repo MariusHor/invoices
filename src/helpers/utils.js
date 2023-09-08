@@ -38,3 +38,20 @@ export function formatTotal(activeCurrency, totalCurrency, total) {
 
   return `${activeCurrency} ${convertedTotal.toFixed(2)}`
 }
+
+export function formatInvoice(invoice, id) {
+  return {
+    ...invoice,
+    total: invoice.items
+      .reduce((acc, curr) => {
+        return acc + curr.price * curr.quantity
+      }, 0)
+      .toFixed(2),
+    client: {
+      ...invoice.client,
+      firstName: formatName(invoice.client.firstName),
+      lastName: formatName(invoice.client.lastName)
+    },
+    id
+  }
+}
