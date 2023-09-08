@@ -5,13 +5,15 @@ import {
   formatStringDate,
   formatName,
   removeCurrency,
-  getInvoiceId
+  getInvoiceId,
+  formatTotal
 } from '@/helpers'
 
 const state = {
   currentSortingOption: SORTING_OPTIONS[0],
   items: [],
-  activeCurrency: INVOICE_CURRENCY_OPTIONS[0]
+  activeCurrency: INVOICE_CURRENCY_OPTIONS[0],
+  formCurrency: INVOICE_CURRENCY_OPTIONS[0]
 }
 
 const getters = {
@@ -20,36 +22,41 @@ const getters = {
     const invoices = state.items.map((invoice) => ({
       id: invoice.id,
       client: `${invoice.client.firstName} ${invoice.client.lastName}`,
-      date: formatStringDate(invoice.date),
-      total: `${invoice.currency} ${invoice.total}`,
+      date: invoice.date,
+      total: formatTotal(state.activeCurrency, invoice.currency, invoice.total),
       status: invoice.status,
       description: invoice.description
     }))
 
-    switch (sortingOption) {
-      case SORTING_OPTIONS[1]:
-        return invoices
-          .sort((a, b) => compareStringDates(a.date, b.date))
-          .slice(startIndex.value, endIndex.value)
-      case SORTING_OPTIONS[2]:
-        return invoices
-          .sort((a, b) => removeCurrency(b.total) - removeCurrency(a.total))
-          .slice(startIndex.value, endIndex.value)
-      case SORTING_OPTIONS[3]:
-        return invoices
-          .sort((a, b) => removeCurrency(a.total) - removeCurrency(b.total))
-          .slice(startIndex.value, endIndex.value)
-      default:
-        return invoices
-          .sort((a, b) => compareStringDates(b.date, a.date))
-          .slice(startIndex.value, endIndex.value)
-    }
+    const sortDateAsc = (a, b) => compareStringDates(a.date, b.date)
+    const sortDateDesc = (a, b) => compareStringDates(b.date, a.date)
+    const sortTotalAsc = (a, b) => removeCurrency(a.total) - removeCurrency(b.total)
+    const sortTotalDesc = (a, b) => removeCurrency(b.total) - removeCurrency(a.total)
+
+    const sortingFunction =
+      sortingOption === SORTING_OPTIONS[1]
+        ? sortDateAsc
+        : sortingOption === SORTING_OPTIONS[2]
+        ? sortTotalDesc
+        : sortingOption === SORTING_OPTIONS[3]
+        ? sortTotalAsc
+        : sortDateDesc
+
+    const sortedInvoices = invoices
+      .slice(startIndex.value, endIndex.value)
+      .sort(sortingFunction)
+      .map((invoice) => ({ ...invoice, date: formatStringDate(invoice.date) }))
+
+    return sortedInvoices
   }
 }
 
 const mutations = {
   setCurrentSortingOption: (state, option) => {
     state.currentSortingOption = option
+  },
+  setFormCurrency: (state, value) => {
+    state.formCurrency = value
   },
   setActiveCurrency: (state, value) => {
     state.activeCurrency = value

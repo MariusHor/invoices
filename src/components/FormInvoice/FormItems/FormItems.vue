@@ -30,7 +30,7 @@ import { INVOICE_UNITS_OPTIONS } from '@/helpers'
       <p>
         Total:
         <span
-          >{{ $store.state.invoices.activeCurrency }}
+          >{{ $store.state.invoices.formCurrency }}
           {{
             fields
               .reduce((acc, curr) => {

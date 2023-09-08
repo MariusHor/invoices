@@ -17,7 +17,7 @@ const { fields, id } = defineProps({
 
 defineEmits(['removeItem'])
 
-const currency = computed(() => store.state.invoices.activeCurrency)
+const currency = computed(() => store.state.invoices.formCurrency)
 const options = ref({ currency, autoDecimalDigits: true })
 const itemTotal = computed(() =>
   typeof fields[id].value.price === 'number'
@@ -41,9 +41,7 @@ const itemTotal = computed(() =>
   <div class="col-wrapper">
     <FormField :id="`quantity_${id}`" :name="`${name}.quantity`" :type="'number'" :min="1" />
   </div>
-  <span class="item__col"
-    >{{ $store.state.invoices.activeCurrency }} {{ itemTotal.toFixed(2) }}</span
-  >
+  <span class="item__col">{{ $store.state.invoices.formCurrency }} {{ itemTotal.toFixed(2) }}</span>
 </template>
 
 <style scoped lang="sass">

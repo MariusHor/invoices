@@ -74,8 +74,9 @@ button {
   border: none;
 }
 
-button:disabled {
-  cursor: initial;
+button:disabled,
+input:disabled {
+  cursor: initial !important;
 }
 
 fieldset {

@@ -13,5 +13,6 @@ export {
   formatStringDate,
   formatName,
   removeCurrency,
-  getInvoiceId
+  getInvoiceId,
+  formatTotal
 } from './utils'
