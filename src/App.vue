@@ -1,19 +1,37 @@
 <script setup>
-import NavBar from '@/components/NavBar.vue'
+import { LogoMain } from '@/components/_UI'
 </script>
 
 <template>
-  <NavBar />
-  <main class="container">
+  <nav class="navbar">
+    <div class="container">
+      <LogoMain />
+    </div>
+  </nav>
+  <main class="flex-column">
     <router-view></router-view>
   </main>
 </template>
 
-<style scoped lang="sass">
-main
-  padding: 3rem
-  max-width: 55rem
-  height: 100%
+<style lang="sass">
+.navbar
+    border-bottom: solid 1px var(--clr-light-grey)
+
+.flex-column
   display: flex
   flex-direction: column
+
+.max-w-10
+  max-width: 10rem
+
+.max-w-9
+  max-width: 9rem
+
+.active
+    background: var(--clr-light-grey)
+
+.col-group
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 1rem
 </style>

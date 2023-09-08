@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { SelectDropdown } from './UI'
+import { DropdownGeneric } from '@/components/_UI'
 import { SORTING_OPTIONS } from '@/helpers'
 
 const store = useStore()
@@ -14,7 +14,7 @@ function commitSortingOption(option) {
 </script>
 
 <template>
-  <SelectDropdown
+  <DropdownGeneric
     :options="SORTING_OPTIONS"
     :currentSelectedOption="currentSortingOption"
     @setCurrentSelectedOption="commitSortingOption"

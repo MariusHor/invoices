@@ -4,8 +4,10 @@ import { onClickOutside } from '@vueuse/core'
 import { DROPDOWN_STATES } from '@/helpers'
 
 const { options, currentSelectedOption } = defineProps({
+  name: String,
   options: Array,
-  currentSelectedOption: String
+  currentSelectedOption: String,
+  optClass: String
 })
 
 const emit = defineEmits(['setCurrentSelectedOption'])
@@ -29,18 +31,21 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 </script>
 
 <template>
-  <div ref="target">
-    <button class="select" @click="handleCurrentState">
-      {{ currentSelectedOption }}
-      <img
-        src="/select-arrow.svg"
-        width="16"
-        height="16"
-        alt=""
-        class="select__icon"
-        :class="selectIconClass"
-      />
-    </button>
+  <div ref="target" class="select" :class="optClass">
+    <input
+      class="select__input"
+      @click="handleCurrentState"
+      :value="currentSelectedOption"
+      :name="name"
+    />
+    <img
+      src="/select-arrow.svg"
+      width="16"
+      height="16"
+      alt=""
+      class="select__icon"
+      :class="selectIconClass"
+    />
     <ul v-if="currentDropdownState === DROPDOWN_STATES[1]" class="select__list">
       <li
         v-for="option in options"
@@ -56,39 +61,48 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 </template>
 
 <style scoped lang="sass">
-.active
-    background: var(--clr-light-grey)
 .select
-    position: relative
-    background: transparent
-    border: 1px solid var(--clr-light-grey)
-    border-radius: 4px
-    width: 10rem
-    max-width: 160px
-    height: 42px
-    padding: 0 1rem
-    display: flex
-    justify-content: space-between
-    align-items: center
-    font-weight: bold
-
-    &__icon
-      &--open
-        transform: rotate(180deg)
-
-    &__list
-      background: var(--clr-white)
-      margin-top: 0.5rem
-      position: absolute
+  width: 100%
+  height: fit-content
+  position: relative
+  &__input
+      position: relative
+      background: transparent
       border: 1px solid var(--clr-light-grey)
       border-radius: 4px
       width: 100%
-      max-width: 160px
+      height: 42px
+      padding: 0 1rem
+      display: flex
+      justify-content: space-between
+      align-items: center
+      font-weight: bold
+      cursor: pointer
+      caret-color: transparent
 
-      li:not(:last-child)
-        border-bottom: solid 1px var(--clr-light-grey)
+  &__icon
+    position: absolute
+    top: 50%
+    translate: 0 -50%
+    right: 1rem
+    pointer-events: none
 
-      button
-        width: 100%
-        padding: 0.5rem 0
+    &--open
+      transform: rotate(180deg)
+
+  &__list
+    background: var(--clr-white)
+    margin-top: 0.5rem
+    position: absolute
+    border: 1px solid var(--clr-light-grey)
+    border-radius: 4px
+    width: 100%
+    z-index: 1
+
+    li:not(:last-child)
+      border-bottom: solid 1px var(--clr-light-grey)
+
+    button
+      width: 100%
+      height: 42px
 </style>
