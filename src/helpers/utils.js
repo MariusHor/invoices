@@ -1,3 +1,5 @@
+import { CONVERSION_RATES } from './constants'
+
 export function compareStringDates(a, b) {
   const dateA = parseDateString(a)
   const dateB = parseDateString(b)
@@ -28,4 +30,11 @@ export function getInvoiceId(firstName, lastName, length) {
   return `${firstName.slice(0, 1).toUpperCase()}${lastName.slice(0, 1).toUpperCase()}${crypto
     .randomUUID()
     .slice(0, length - 2)}`
+}
+
+export function formatTotal(activeCurrency, totalCurrency, total) {
+  const conversionRate = CONVERSION_RATES[`${activeCurrency}_${totalCurrency}`] || 1.0
+  const convertedTotal = total * conversionRate
+
+  return `${activeCurrency} ${convertedTotal.toFixed(2)}`
 }

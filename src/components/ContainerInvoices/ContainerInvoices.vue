@@ -6,6 +6,7 @@ import { ButtonAdd } from '@/components'
 import { PaginationControls } from '@/components/_UI'
 import TableInvoices from './TableInvoices/TableInvoices.vue'
 import DropdownSorting from './DropdownSorting/DropdownSorting.vue'
+import DropdownCurrency from './DropdownCurrency/DropdownCurrency.vue'
 
 const store = useStore()
 const currentPage = ref(0)
@@ -21,7 +22,11 @@ const currentPageInvoices = computed(() =>
 
 <template>
   <div class="table-actions">
-    <DropdownSorting :optClass="'max-w-10'" />
+    <div class="table-actions__left">
+      <DropdownSorting :optClass="'max-w-10'" :disabled="!currentPageInvoices.length" />
+      <DropdownCurrency :optClass="'max-w-10'" :disabled="!currentPageInvoices.length" />
+    </div>
+
     <ButtonAdd :variant="'dark'" />
   </div>
   <div class="table-wrapper flex-column">
@@ -40,6 +45,10 @@ const currentPageInvoices = computed(() =>
   display: flex
   justify-content: space-between
   align-items: center
+
+  &__left
+    display: flex
+    gap: 0.5rem
 
 .table-wrapper
   height: 100%

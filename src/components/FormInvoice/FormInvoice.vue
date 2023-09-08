@@ -77,9 +77,9 @@ function submitForm(values) {
           <DropdownForm
             :label="'Moneda'"
             :name="'currency'"
-            :initial-value="$store.state.invoices.activeCurrency"
+            :initial-value="$store.state.invoices.formCurrency"
             :options="INVOICE_CURRENCY_OPTIONS"
-            :change-callback="(value) => $store.commit('invoices/setActiveCurrency', value)"
+            :change-callback="(value) => $store.commit('invoices/setFormCurrency', value)"
           />
         </template>
         <template #end>

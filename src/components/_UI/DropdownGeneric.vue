@@ -7,7 +7,11 @@ const { options, currentSelectedOption } = defineProps({
   name: String,
   options: Array,
   currentSelectedOption: String,
-  optClass: String
+  optClass: String,
+  disabled: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const emit = defineEmits(['setCurrentSelectedOption'])
@@ -37,6 +41,7 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
       @click="handleCurrentState"
       :value="currentSelectedOption"
       :name="name"
+      :disabled="disabled"
     />
     <img
       src="/select-arrow.svg"

@@ -7,6 +7,13 @@ export const INVOICE_STATUS_OPTIONS = ['Done', 'Pending']
 export const INVOICE_UNITS_OPTIONS = ['Ore', 'Zile', 'Saptamani', 'Luni']
 export const INVOICE_CURRENCY_OPTIONS = ['EUR', 'USD', 'GBP']
 
+export const CONVERSION_RATES = {
+  [`${INVOICE_CURRENCY_OPTIONS[0]}_${INVOICE_CURRENCY_OPTIONS[1]}`]: 0.93,
+  [`${INVOICE_CURRENCY_OPTIONS[1]}_${INVOICE_CURRENCY_OPTIONS[0]}`]: 1.07,
+  [`${INVOICE_CURRENCY_OPTIONS[1]}_${INVOICE_CURRENCY_OPTIONS[1]}`]: 1.0,
+  [`${INVOICE_CURRENCY_OPTIONS[0]}_${INVOICE_CURRENCY_OPTIONS[0]}`]: 1.0
+}
+
 export const FORM_INITIAL_DATA = {
   client: {
     firstName: '',
