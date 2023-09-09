@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { ButtonIcon } from '@/components/_UI'
+import { ButtonIcon, ModalGeneric } from '@/components/_UI'
 import { ModalNavigateBack } from '@/components/'
 
 defineProps({
@@ -10,23 +10,44 @@ defineProps({
   }
 })
 
-const showModal = ref(false)
+defineEmits(['save-draft'])
+
+const showNavigateBackModal = ref(false)
+const showDraftModal = ref(false)
 </script>
 
 <template>
   <div class="form__actions flex-column">
     <div>
-      <ButtonIcon v-if="!isEditing" :text="'Draft'" :variant="'light-md'" :width="'full'" />
+      <ButtonIcon
+        v-if="!isEditing"
+        :text="'Draft'"
+        :variant="'light-md'"
+        :width="'full'"
+        @handleClick="showDraftModal = true"
+      />
       <ButtonIcon
         :text="'Renunta'"
         :variant="'light-md'"
         :width="'full'"
-        @handleClick="() => (showModal = true)"
+        @handleClick="() => (showNavigateBackModal = true)"
       />
     </div>
     <ButtonIcon :text="'Salveaza'" :variant="'dark-md'" :width="'full'" :type="'submit'" />
   </div>
-  <ModalNavigateBack :show-modal="showModal" @close-modal="showModal = false" />
+  <ModalNavigateBack
+    :show-modal="showNavigateBackModal"
+    @close-modal="showNavigateBackModal = false"
+  />
+  <ModalGeneric
+    :isActive="showDraftModal"
+    @close-modal="showDraftModal = false"
+    @confirm-action="$emit('save-draft')"
+  >
+    <template #body>
+      <p>Salveaza factura ca draft?</p>
+    </template>
+  </ModalGeneric>
 </template>
 
 <style scoped lang="sass">
