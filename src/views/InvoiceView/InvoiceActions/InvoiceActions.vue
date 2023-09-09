@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { ModalConfirmation } from '@/components'
+import { ModalDeleteInvoice } from '@/components'
 import { ButtonIcon } from '@/components/_UI'
 
 defineProps({
@@ -28,20 +28,7 @@ const showModal = ref(false)
       @handleClick="showModal = true"
     />
   </div>
-  <ModalConfirmation
-    :isActive="showModal"
-    @close-modal="showModal = false"
-    @confirm-action="
-      () => {
-        $store.commit('invoices/removeInvoice', id)
-        $router.push({ path: '/' })
-      }
-    "
-  >
-    <template #body>
-      <p>Factura va fi stearsa</p>
-    </template>
-  </ModalConfirmation>
+  <ModalDeleteInvoice @close-modal="showModal = false" :showModal="showModal" :id="id" />
 </template>
 
 <style scoped lang="sass">

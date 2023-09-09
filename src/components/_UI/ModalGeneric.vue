@@ -1,5 +1,5 @@
 <script setup>
-import { ButtonIcon } from './_UI'
+import ButtonIcon from './ButtonIcon.vue'
 
 const { isActive } = defineProps({
   isActive: Boolean

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { ButtonIcon } from '@/components/_UI'
-import { ModalConfirmation } from '@/components'
+import { ModalNavigateBack } from '@/components/'
 
 defineProps({
   isEditing: {
@@ -26,15 +26,7 @@ const showModal = ref(false)
     </div>
     <ButtonIcon :text="'Salveaza'" :variant="'dark-md'" :width="'full'" :type="'submit'" />
   </div>
-  <ModalConfirmation
-    :isActive="showModal"
-    @close-modal="showModal = false"
-    @confirm-action="$router.back()"
-  >
-    <template #body>
-      <p>Toate modificarile vor fi pierdute</p>
-    </template>
-  </ModalConfirmation>
+  <ModalNavigateBack :show-modal="showModal" @close-modal="showModal = false" />
 </template>
 
 <style scoped lang="sass">

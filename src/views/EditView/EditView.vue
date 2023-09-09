@@ -12,7 +12,7 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
 </script>
 
 <template>
-  <AppLayout :headerText="`Editare #${invoice.id}`">
+  <AppLayout :headerText="`Editare #${invoice.id}`" :shouldDisplayModal="true">
     <template #content>
       <FormInvoice :isEditing="true" :form-values="invoice" />
     </template>
