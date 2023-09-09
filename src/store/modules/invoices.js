@@ -18,7 +18,8 @@ const state = {
 
 const getters = {
   getInvoice: (state) => (id) => {
-    const invoice = state.items.find((invoice) => invoice.id === id)
+    const invoice = state.items.find((invoice) => invoice.id === id || invoice.draftId === id)
+
     return {
       ...invoice,
       date: formatStringDate(invoice.date)
@@ -50,8 +51,8 @@ const getters = {
         : sortDateDesc
 
     const sortedInvoices = invoices
-      .slice(startIndex.value, endIndex.value)
       .sort(sortingFunction)
+      .slice(startIndex.value, endIndex.value)
       .map((invoice) => ({ ...invoice, date: formatStringDate(invoice.date) }))
 
     return sortedInvoices
@@ -76,10 +77,10 @@ const mutations = {
   removeInvoice: (state, invoiceId) => {
     state.items = state.items.filter((invoice) => invoice.id !== invoiceId)
   },
-  editInvoice: (state, { values, id }) => {
-    state.items = state.items.map((invoice) =>
-      invoice.id === id ? formatInvoice(values, id) : invoice
-    )
+  editInvoice: (state, { values, id, wasDraft }) => {
+    const newInvoice = formatInvoice(values, id, wasDraft)
+
+    state.items = state.items.map((invoice) => (invoice.id === id ? newInvoice : invoice))
   }
 }
 

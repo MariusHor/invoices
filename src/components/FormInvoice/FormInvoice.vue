@@ -1,4 +1,5 @@
 <script setup>
+import { ref, computed } from 'vue'
 import { Form } from 'vee-validate'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
@@ -11,7 +12,7 @@ import DropdownForm from './DropdownForm/DropdownForm.vue'
 import { INVOICE_STATUS_OPTIONS, FORM_INITIAL_DATA, INVOICE_CURRENCY_OPTIONS } from '@/helpers'
 import { invoiceValidationSchema } from '@/schemas'
 
-const { isEditing, formValues } = defineProps({
+const { isEditing, formValues, wasDraft } = defineProps({
   formValues: {
     type: Object,
     default: FORM_INITIAL_DATA
@@ -19,19 +20,30 @@ const { isEditing, formValues } = defineProps({
   isEditing: {
     type: Boolean,
     default: false
+  },
+  wasDraft: {
+    type: Boolean,
+    default: false
   }
 })
+
+const isDraft = ref(false)
+const schema = computed(() => (isDraft.value ? {} : invoiceValidationSchema))
 
 const router = useRouter()
 const store = useStore()
 
-function submitForm(values) {
-  if (!isEditing) {
+function formSubmitHandler(values) {
+  if (isDraft.value) {
+    store.commit('invoices/addInvoice', { ...values, status: 'Draft' })
+  }
+
+  if (!isEditing && !isDraft.value) {
     store.commit('invoices/addInvoice', values)
   }
 
-  if (isEditing) {
-    store.commit('invoices/editInvoice', { values, id: formValues.id })
+  if (isEditing && !isDraft.value) {
+    store.commit('invoices/editInvoice', { values, id: formValues.id, wasDraft })
   }
 
   router.push({ path: '/' })
@@ -40,10 +52,16 @@ function submitForm(values) {
 
 <template>
   <Form
-    :validation-schema="invoiceValidationSchema"
-    :initial-values="formValues"
     class="form"
-    @submit="submitForm"
+    @submit="
+      (values) => {
+        isDraft = false
+        formSubmitHandler(values)
+      }
+    "
+    :validation-schema="schema"
+    :initial-values="formValues"
+    v-slot="{ handleSubmit }"
   >
     <div class="form__left-pane">
       <SectionLayout :header-text="'Detalii client'">
@@ -91,7 +109,15 @@ function submitForm(values) {
           />
         </template>
       </SectionLayout>
-      <FormActions :is-editing="isEditing" />
+      <FormActions
+        :is-editing="isEditing"
+        @save-draft="
+          () => {
+            isDraft = true
+            handleSubmit((values) => formSubmitHandler(values))
+          }
+        "
+      />
     </div>
   </Form>
 </template>

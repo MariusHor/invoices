@@ -26,10 +26,12 @@ export function removeCurrency(string) {
   return parseFloat(string.split(' ')[1])
 }
 
+function getClientInitials(firstName, lastName) {
+  return `${firstName.slice(0, 1).toUpperCase()}${lastName.slice(0, 1).toUpperCase()}`
+}
+
 export function getInvoiceId(firstName, lastName, length) {
-  return `${firstName.slice(0, 1).toUpperCase()}${lastName.slice(0, 1).toUpperCase()}${crypto
-    .randomUUID()
-    .slice(0, length - 2)}`
+  return `${getClientInitials(firstName, lastName)}${crypto.randomUUID().slice(0, length - 2)}`
 }
 
 export function formatTotal(activeCurrency, totalCurrency, total) {
@@ -39,9 +41,13 @@ export function formatTotal(activeCurrency, totalCurrency, total) {
   return `${activeCurrency} ${convertedTotal.toFixed(2)}`
 }
 
-export function formatInvoice(invoice, id) {
+export function formatInvoice(invoice, id, wasDraft) {
   return {
     ...invoice,
+    id: wasDraft
+      ? `${getClientInitials(invoice.client.firstName, invoice.client.lastName)}${id}`
+      : id,
+    draftId: wasDraft ? id : null,
     client: {
       ...invoice.client,
       firstName: formatName(invoice.client.firstName),
@@ -58,7 +64,6 @@ export function formatInvoice(invoice, id) {
       .reduce((acc, curr) => {
         return acc + curr.price * curr.quantity
       }, 0)
-      .toFixed(2),
-    id
+      .toFixed(2)
   }
 }
