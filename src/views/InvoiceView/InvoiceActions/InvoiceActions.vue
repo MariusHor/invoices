@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from 'vue'
+import { ModalDeleteInvoice } from '@/components'
 import { ButtonIcon } from '@/components/_UI'
 
 defineProps({
@@ -7,6 +9,8 @@ defineProps({
     required: true
   }
 })
+
+const showModal = ref(false)
 </script>
 
 <template>
@@ -15,24 +19,16 @@ defineProps({
       :text="'Editeaza'"
       :variant="'light-md'"
       :width="'full'"
-      @handleClick="
-        () => {
-          $router.push({ path: `/${id}/edit` })
-        }
-      "
+      @handleClick="$router.push({ path: `/${id}/edit` })"
     />
     <ButtonIcon
       :text="'Sterge'"
       :variant="'dark-md'"
       :width="'full'"
-      @handleClick="
-        () => {
-          $store.commit('invoices/removeInvoice', id)
-          $router.push({ path: '/' })
-        }
-      "
+      @handleClick="showModal = true"
     />
   </div>
+  <ModalDeleteInvoice @close-modal="showModal = false" :showModal="showModal" :id="id" />
 </template>
 
 <style scoped lang="sass">

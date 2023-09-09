@@ -4,7 +4,7 @@ import { AppLayout } from '@/layouts'
 </script>
 
 <template>
-  <AppLayout :headerText="'Factura noua'">
+  <AppLayout :headerText="'Factura noua'" :shouldDisplayModal="true">
     <template #content>
       <FormInvoice />
     </template>

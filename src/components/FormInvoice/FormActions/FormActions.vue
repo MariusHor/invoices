@@ -1,6 +1,7 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import { ButtonIcon } from '@/components/_UI'
+import { ModalNavigateBack } from '@/components/'
 
 defineProps({
   isEditing: {
@@ -8,12 +9,8 @@ defineProps({
     default: false
   }
 })
-const router = useRouter()
 
-function handleInvoiceDiscard() {
-  // SHOW MODAL THAT ASKS IF USER REALLY WANTS TO DISCARD THE CURRENT INVOICE FORM
-  router.back()
-}
+const showModal = ref(false)
 </script>
 
 <template>
@@ -24,16 +21,12 @@ function handleInvoiceDiscard() {
         :text="'Renunta'"
         :variant="'light-md'"
         :width="'full'"
-        @handleClick="handleInvoiceDiscard"
+        @handleClick="() => (showModal = true)"
       />
     </div>
-    <ButtonIcon
-      :text="isEditing ? 'Editeaza' : 'Salveaza'"
-      :variant="'dark-md'"
-      :width="'full'"
-      :type="'submit'"
-    />
+    <ButtonIcon :text="'Salveaza'" :variant="'dark-md'" :width="'full'" :type="'submit'" />
   </div>
+  <ModalNavigateBack :show-modal="showModal" @close-modal="showModal = false" />
 </template>
 
 <style scoped lang="sass">

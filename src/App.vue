@@ -3,11 +3,13 @@ import { LogoMain } from '@/components/_UI'
 </script>
 
 <template>
-  <nav class="navbar">
-    <div class="container">
-      <LogoMain />
-    </div>
-  </nav>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <LogoMain />
+      </div>
+    </nav>
+  </header>
   <main class="flex-column">
     <router-view></router-view>
   </main>
