@@ -37,7 +37,9 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
           <SectionLayout :headerText="'Articole'">
             <template #end>
               <div class="invoice__table-wrapper flex-column">
-                <InvoiceItemTable :items="invoice.items" :currency="invoice.currency" />
+                <div>
+                  <InvoiceItemTable :items="invoice.items" :currency="invoice.currency" />
+                </div>
                 <InvoiceTotal :currency="invoice.currency" :total="invoice.total" />
               </div>
             </template>
@@ -58,14 +60,22 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
 
 <style scoped lang="sass">
 .invoice
-    display: grid
-    grid-template-columns: 5fr 2fr
+    display: flex
+    flex-direction: column
     height: 100%
     gap: 2rem
+    flex: 1
+    @media screen and (min-width: 840px)
+      display: grid
+      grid-template-columns: 5fr 2fr
 
     &__table-wrapper
         height: 100%
         justify-content: space-between
+        overflow-x: auto
+        gap: 1rem
+        div
+          overflow-x: auto
 
     &__left-pane, &__right-pane
         border: solid 1px var(--clr-light-grey)
@@ -75,8 +85,10 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
     &__left-pane
         gap: 2rem
         justify-content: space-between
+        width: 100%
 
 
     &__right-pane
+        gap: 1rem
         justify-content: space-between
 </style>

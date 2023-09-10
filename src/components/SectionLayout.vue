@@ -6,7 +6,7 @@ defineProps({
   },
   hasColGroup: {
     type: Boolean,
-    default: true
+    default: false
   },
   height: {
     type: String,

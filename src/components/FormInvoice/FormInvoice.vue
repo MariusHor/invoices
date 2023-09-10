@@ -64,7 +64,7 @@ function formSubmitHandler(values) {
     v-slot="{ handleSubmit }"
   >
     <div class="form__left-pane">
-      <SectionLayout :header-text="'Detalii client'">
+      <SectionLayout :header-text="'Detalii client'" :hasColGroup="true">
         <template #colGroup>
           <FormField :name="'client.firstName'" :label="'Prenume'" id="firstName" />
           <FormField :name="'client.lastName'" :label="'Nume'" id="lastName" />
@@ -76,14 +76,14 @@ function formSubmitHandler(values) {
           </div>
         </template>
       </SectionLayout>
-      <SectionLayout :header-text="'Articole'" :has-col-group="false">
+      <SectionLayout :header-text="'Articole'">
         <template #end>
           <FormItems />
         </template>
       </SectionLayout>
     </div>
     <div class="form__right-pane flex-column">
-      <SectionLayout :header-text="'Detalii factura'">
+      <SectionLayout :header-text="'Detalii factura'" :hasColGroup="true">
         <template #colGroup>
           <DropdownForm
             :label="'Status'"

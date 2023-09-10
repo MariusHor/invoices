@@ -50,7 +50,6 @@ const currentPageInvoices = computed(() =>
   @media screen and (min-width: 768px)
     gap: 3rem
 
-
 .overflow-y-auto
   overflow-x: auto
 </style>
