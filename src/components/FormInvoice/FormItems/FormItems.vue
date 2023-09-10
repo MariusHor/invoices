@@ -41,7 +41,7 @@ import { InvoiceTotal } from '../..'
 
 <style scoped lang="sass">
 .items
-  gap: 0.5rem
+  gap: 1rem
   height: 100%
   justify-content: space-between
 
@@ -51,7 +51,12 @@ import { InvoiceTotal } from '../..'
 
   fieldset
     display: flex
+    flex-direction: column
     gap: 1rem
+    width: 100%
+    border: solid 1px var(--clr-light-grey)
+    border-radius: 5px
+    padding: 1rem
 
 p
   display: flex

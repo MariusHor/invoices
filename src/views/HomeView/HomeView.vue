@@ -4,6 +4,7 @@ import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
 import { PaginationControls } from '@/components/_UI'
+import { ButtonAdd } from '@/components'
 import TableInvoices from './TableInvoices/TableInvoices.vue'
 import { MAX_INV_PER_PAGE } from '@/helpers'
 import TableActions from './TableActions/TableActions.vue'
@@ -23,8 +24,11 @@ const currentPageInvoices = computed(() =>
 <template>
   <AppLayout :headerText="'Facturi'" :hasNavigateBackBtn="false">
     <template #content>
-      <TableActions :has-invoices="currentPageInvoices.length > 0" />
-      <div class="table-wrapper flex-column">
+      <TableActions
+        :has-invoices="currentPageInvoices.length > 0"
+        v-if="currentPageInvoices.length"
+      />
+      <div class="table-wrapper flex-column" v-if="currentPageInvoices.length">
         <div class="overflow-y-auto">
           <TableInvoices :current-page-invoices="currentPageInvoices" />
         </div>
@@ -35,11 +39,21 @@ const currentPageInvoices = computed(() =>
           @decreasePageCount="currentPage -= 1"
         />
       </div>
+      <div v-if="!currentPageInvoices.length" class="fallback flex-column">
+        <h2>Momentan nu exista facturi salvate</h2>
+        <ButtonAdd :text="'Adauga'" :variant="'dark-md'" />
+      </div>
     </template>
   </AppLayout>
 </template>
 
 <style scoped lang="sass">
+.fallback
+  margin: 0 auto
+  justify-content: center
+  align-items: center
+  gap: 1rem
+  flex: 1
 .table-wrapper
   flex: 1
   justify-content: space-between

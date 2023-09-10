@@ -38,6 +38,7 @@ import { LogoMain } from '@/components/_UI'
 
 .col-group
     display: grid
-    grid-template-columns: 1fr 1fr
-    gap: 1rem
+    @media screen and (min-width: 840px)
+      grid-template-columns: 1fr 1fr
+      gap: 1rem
 </style>

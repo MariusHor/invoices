@@ -124,16 +124,23 @@ function formSubmitHandler(values) {
 
 <style scoped lang="sass">
 .form
-    display: grid
-    grid-template-columns: 5fr 2fr
+    display: flex
+    flex-direction: column
     gap: 2rem
     height: 100%
-    max-height: 37.25rem
+    max-width: 450px
+    width: 100%
+    margin: 0 auto
+    @media screen and (min-width: 840px)
+      display: grid
+      grid-template-columns: 5fr 2fr
+      max-width: none
 
     &__left-pane
         gap: 1rem
         display: grid
-        grid-template-rows: 1fr 2fr
+        @media screen and (min-width: 840px)
+          grid-template-rows: 1fr 2fr
 
     &__right-pane
         justify-content: space-between
