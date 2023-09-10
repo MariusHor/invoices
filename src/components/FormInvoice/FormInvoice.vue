@@ -131,6 +131,7 @@ function formSubmitHandler(values) {
     max-width: 450px
     width: 100%
     margin: 0 auto
+    flex: 1
     @media screen and (min-width: 840px)
       display: grid
       grid-template-columns: 5fr 2fr
@@ -140,8 +141,13 @@ function formSubmitHandler(values) {
         gap: 1rem
         display: grid
         @media screen and (min-width: 840px)
-          grid-template-rows: 1fr 2fr
+          grid-template-rows: 2fr 3fr
 
     &__right-pane
         justify-content: space-between
+
+    &__left-pane, &__right-pane
+        border: solid 1px var(--clr-light-grey)
+        border-radius: 5px
+        padding: 1rem
 </style>
