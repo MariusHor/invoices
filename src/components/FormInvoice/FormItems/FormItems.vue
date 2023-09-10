@@ -10,15 +10,18 @@ import { InvoiceTotal } from '../..'
   <div class="items flex-column">
     <FieldArray name="items" v-slot="{ fields, push, remove }">
       <div class="items__wrapper flex-column">
-        <fieldset v-for="(field, index) in fields" :key="field.key">
-          <FormItem
-            :key="index"
-            :id="index"
-            :name="`items[${index}]`"
-            :fields="fields"
-            @removeItem="remove(index)"
-          />
-        </fieldset>
+        <div class="items-list">
+          <fieldset v-for="(field, index) in fields" :key="field.key">
+            <FormItem
+              :key="index"
+              :id="index"
+              :name="`items[${index}]`"
+              :fields="fields"
+              @removeItem="remove(index)"
+            />
+          </fieldset>
+        </div>
+
         <ButtonAdd
           :isLink="false"
           @handleClick="
@@ -40,8 +43,15 @@ import { InvoiceTotal } from '../..'
 </template>
 
 <style scoped lang="sass">
+.items-list
+  display: flex
+  flex-direction: column
+  gap: 1rem
+  @media screen and (min-width: 840px)
+    max-height: 154px
+    overflow-y: scroll
 .items
-  gap: 0.5rem
+  gap: 1rem
   height: 100%
   justify-content: space-between
 
@@ -51,7 +61,12 @@ import { InvoiceTotal } from '../..'
 
   fieldset
     display: flex
+    flex-direction: column
     gap: 1rem
+    width: 100%
+    border: solid 1px var(--clr-light-grey)
+    border-radius: 5px
+    padding: 1rem
 
 p
   display: flex

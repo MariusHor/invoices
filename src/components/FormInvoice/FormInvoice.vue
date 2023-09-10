@@ -64,7 +64,7 @@ function formSubmitHandler(values) {
     v-slot="{ handleSubmit }"
   >
     <div class="form__left-pane">
-      <SectionLayout :header-text="'Detalii client'">
+      <SectionLayout :header-text="'Detalii client'" :hasColGroup="true">
         <template #colGroup>
           <FormField :name="'client.firstName'" :label="'Prenume'" id="firstName" />
           <FormField :name="'client.lastName'" :label="'Nume'" id="lastName" />
@@ -76,14 +76,14 @@ function formSubmitHandler(values) {
           </div>
         </template>
       </SectionLayout>
-      <SectionLayout :header-text="'Articole'" :has-col-group="false">
+      <SectionLayout :header-text="'Articole'">
         <template #end>
           <FormItems />
         </template>
       </SectionLayout>
     </div>
     <div class="form__right-pane flex-column">
-      <SectionLayout :header-text="'Detalii factura'">
+      <SectionLayout :header-text="'Detalii factura'" :hasColGroup="true">
         <template #colGroup>
           <DropdownForm
             :label="'Status'"
@@ -124,17 +124,30 @@ function formSubmitHandler(values) {
 
 <style scoped lang="sass">
 .form
-    display: grid
-    grid-template-columns: 5fr 2fr
+    display: flex
+    flex-direction: column
     gap: 2rem
     height: 100%
-    max-height: 37.25rem
+    max-width: 450px
+    width: 100%
+    margin: 0 auto
+    flex: 1
+    @media screen and (min-width: 840px)
+      display: grid
+      grid-template-columns: 5fr 2fr
+      max-width: none
 
     &__left-pane
         gap: 1rem
         display: grid
-        grid-template-rows: 1fr 2fr
+        @media screen and (min-width: 840px)
+          grid-template-rows: 2fr 3fr
 
     &__right-pane
         justify-content: space-between
+
+    &__left-pane, &__right-pane
+        border: solid 1px var(--clr-light-grey)
+        border-radius: 5px
+        padding: 1rem
 </style>

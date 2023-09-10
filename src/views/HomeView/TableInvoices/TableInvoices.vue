@@ -20,7 +20,9 @@ function toggleExpandInvoice(id) {
       <tr>
         <th width="80"></th>
         <th scope="col" v-for="heading in INVOICES_TABLE_HEADINGS" :key="heading" width="150">
-          {{ heading }}
+          <div>
+            {{ heading }}
+          </div>
         </th>
       </tr>
     </thead>
@@ -34,17 +36,23 @@ function toggleExpandInvoice(id) {
           </td>
           <template v-for="key in Object.keys(invoice)" :key="key">
             <td width="150" v-if="key !== 'description'">
-              {{ invoice[key] }}
+              <div :class="key === 'total' ? 'cell-total' : ''">
+                {{ invoice[key] }}
+              </div>
             </td>
           </template>
           <td class="invoice-actions">
-            <InvoiceActions :id="invoice.id" />
+            <div>
+              <InvoiceActions :id="invoice.id" />
+            </div>
           </td>
         </tr>
         <tr v-if="invoiceToExpandId === invoice.id">
           <td colspan="7">
-            <span>Descriere</span>
-            <p>{{ invoice['description'] }}</p>
+            <div>
+              <span>Descriere</span>
+              <p>{{ invoice['description'] }}</p>
+            </div>
           </td>
         </tr>
       </template>
@@ -62,7 +70,14 @@ thead
   color: var(--clr-white)
 
 td, th
-  padding: 1rem 0
+  padding: 1rem
+  border-bottom: solid 1px var(--clr-light-grey)
+  border-right: solid 1px var(--clr-light-grey)
+  text-overflow: ellipsis
+
+
+td:nth-child(1)
+  border-left: solid 1px var(--clr-light-grey)
 
 th
   font-weight: bold
@@ -75,6 +90,10 @@ td
     margin: 0 auto
 
 .invoice-actions
-  display: flex
-  gap: 0.25rem
+  div
+    display: flex
+    gap: 0.25rem
+
+.cell-total
+  min-width: 85px
 </style>

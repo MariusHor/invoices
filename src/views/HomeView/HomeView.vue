@@ -3,12 +3,11 @@ import { AppLayout } from '@/layouts'
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { ButtonAdd } from '@/components'
 import { PaginationControls } from '@/components/_UI'
+import { ButtonAdd } from '@/components'
 import TableInvoices from './TableInvoices/TableInvoices.vue'
-import DropdownSorting from './DropdownSorting/DropdownSorting.vue'
-import DropdownCurrency from './DropdownCurrency/DropdownCurrency.vue'
 import { MAX_INV_PER_PAGE } from '@/helpers'
+import TableActions from './TableActions/TableActions.vue'
 
 const store = useStore()
 const currentPage = ref(0)
@@ -25,16 +24,14 @@ const currentPageInvoices = computed(() =>
 <template>
   <AppLayout :headerText="'Facturi'" :hasNavigateBackBtn="false">
     <template #content>
-      <div class="table-actions">
-        <div class="table-actions__left">
-          <DropdownSorting :optClass="'max-w-10'" :disabled="!currentPageInvoices.length" />
-          <DropdownCurrency :optClass="'max-w-10'" :disabled="!currentPageInvoices.length" />
+      <TableActions
+        :has-invoices="currentPageInvoices.length > 0"
+        v-if="currentPageInvoices.length"
+      />
+      <div class="table-wrapper flex-column" v-if="currentPageInvoices.length">
+        <div class="overflow-y-auto">
+          <TableInvoices :current-page-invoices="currentPageInvoices" />
         </div>
-
-        <ButtonAdd :variant="'dark-md'" />
-      </div>
-      <div class="table-wrapper flex-column">
-        <TableInvoices :current-page-invoices="currentPageInvoices" />
         <PaginationControls
           :currentPage="currentPage"
           :hasNextPage="hasNextPage"
@@ -42,23 +39,31 @@ const currentPageInvoices = computed(() =>
           @decreasePageCount="currentPage -= 1"
         />
       </div>
+      <div v-if="!currentPageInvoices.length" class="fallback flex-column">
+        <h2>Momentan nu exista facturi salvate</h2>
+        <ButtonAdd :text="'Adauga'" :variant="'dark-md'" />
+      </div>
     </template>
   </AppLayout>
 </template>
 
 <style scoped lang="sass">
-.table-actions
-  display: flex
-  justify-content: space-between
+.fallback
+  margin: 0 auto
+  justify-content: center
   align-items: center
-
-  &__left
-    display: flex
-    gap: 0.5rem
-
+  gap: 1rem
+  flex: 1
 .table-wrapper
-  height: 100%
-  display: flex
-  flex-direction: column
+  flex: 1
   justify-content: space-between
+  gap: 1rem
+  @media screen and (min-width: 640px)
+    gap: 2rem
+
+  @media screen and (min-width: 768px)
+    gap: 3rem
+
+.overflow-y-auto
+  overflow-x: auto
 </style>

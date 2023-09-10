@@ -27,6 +27,7 @@ const emit = defineEmits(['handleClick'])
     :isLink="isLink"
     :to="'/create'"
     :disabled="disabled"
+    :hideTextOnSmRes="true"
     @handleClick="emit('handleClick')"
   >
     <template #start>

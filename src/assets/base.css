@@ -46,12 +46,12 @@
   font-weight: normal;
 }
 
-html,
-body {
-  height: 100%;
+html {
+  min-height: 100%;
 }
 
 body {
+  min-height: 100vh;
   color: var(--color-text);
   line-height: 1.6;
   font-size: 15px;

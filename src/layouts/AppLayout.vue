@@ -32,4 +32,5 @@ defineProps({
 .section-content
   gap: 1.575rem
   height: 100%
+  flex: 1
 </style>

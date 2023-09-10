@@ -1,8 +1,13 @@
 <script setup>
+import { Icon } from '@iconify/vue'
 import ButtonIcon from './ButtonIcon.vue'
 
 const { isActive } = defineProps({
-  isActive: Boolean
+  isActive: Boolean,
+  showFooter: {
+    type: Boolean,
+    default: true
+  }
 })
 
 defineEmits(['close-modal', 'confirm-action'])
@@ -17,11 +22,11 @@ defineEmits(['close-modal', 'confirm-action'])
             <slot name="header"></slot>
           </div>
 
-          <div class="modal-body">
+          <div class="modal-body flex-column">
             <slot name="body"></slot>
           </div>
 
-          <div class="modal-footer">
+          <div v-if="showFooter" class="modal-footer">
             <ButtonIcon :text="'Inapoi'" @handle-click="$emit('close-modal')" />
             <ButtonIcon
               :text="'Confirma'"
@@ -29,6 +34,9 @@ defineEmits(['close-modal', 'confirm-action'])
               @handle-click="$emit('confirm-action')"
             />
           </div>
+          <button class="close-icon" @click="$emit('close-modal')">
+            <Icon icon="ph:x-bold" width="24" />
+          </button>
         </div>
       </div>
     </Transition>
@@ -49,13 +57,21 @@ defineEmits(['close-modal', 'confirm-action'])
 }
 
 .modal-container {
+  position: relative;
   width: 300px;
   margin: auto;
-  padding: 20px 30px;
+  padding: 1.375rem;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
+}
+
+.close-icon {
+  position: absolute;
+  top: 1.375rem;
+  right: 1.375rem;
+  color: var(--clr-dark-grey);
 }
 
 .modal-header h3 {
@@ -66,6 +82,9 @@ defineEmits(['close-modal', 'confirm-action'])
 .modal-body {
   margin: 20px 0;
   text-align: center;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-footer {
