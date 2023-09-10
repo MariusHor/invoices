@@ -34,7 +34,9 @@ const currentPageInvoices = computed(() =>
         <ButtonAdd :variant="'dark-md'" />
       </div>
       <div class="table-wrapper flex-column">
-        <TableInvoices :current-page-invoices="currentPageInvoices" />
+        <div class="overflow-y-auto">
+          <TableInvoices :current-page-invoices="currentPageInvoices" />
+        </div>
         <PaginationControls
           :currentPage="currentPage"
           :hasNextPage="hasNextPage"
@@ -57,8 +59,10 @@ const currentPageInvoices = computed(() =>
     gap: 0.5rem
 
 .table-wrapper
-  height: 100%
-  display: flex
-  flex-direction: column
+  flex: 1
   justify-content: space-between
+  gap: 3rem
+
+.overflow-y-auto
+  overflow-x: auto
 </style>
