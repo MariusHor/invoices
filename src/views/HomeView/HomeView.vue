@@ -3,12 +3,10 @@ import { AppLayout } from '@/layouts'
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { ButtonAdd } from '@/components'
 import { PaginationControls } from '@/components/_UI'
 import TableInvoices from './TableInvoices/TableInvoices.vue'
-import DropdownSorting from './DropdownSorting/DropdownSorting.vue'
-import DropdownCurrency from './DropdownCurrency/DropdownCurrency.vue'
 import { MAX_INV_PER_PAGE } from '@/helpers'
+import TableActions from './TableActions/TableActions.vue'
 
 const store = useStore()
 const currentPage = ref(0)
@@ -25,14 +23,7 @@ const currentPageInvoices = computed(() =>
 <template>
   <AppLayout :headerText="'Facturi'" :hasNavigateBackBtn="false">
     <template #content>
-      <div class="table-actions">
-        <div class="table-actions__left">
-          <DropdownSorting :optClass="'max-w-10'" :disabled="!currentPageInvoices.length" />
-          <DropdownCurrency :optClass="'max-w-10'" :disabled="!currentPageInvoices.length" />
-        </div>
-
-        <ButtonAdd :variant="'dark-md'" />
-      </div>
+      <TableActions :has-invoices="currentPageInvoices.length > 0" />
       <div class="table-wrapper flex-column">
         <div class="overflow-y-auto">
           <TableInvoices :current-page-invoices="currentPageInvoices" />
@@ -49,19 +40,16 @@ const currentPageInvoices = computed(() =>
 </template>
 
 <style scoped lang="sass">
-.table-actions
-  display: flex
-  justify-content: space-between
-  align-items: center
-
-  &__left
-    display: flex
-    gap: 0.5rem
-
 .table-wrapper
   flex: 1
   justify-content: space-between
-  gap: 3rem
+  gap: 1rem
+  @media screen and (min-width: 640px)
+    gap: 2rem
+
+  @media screen and (min-width: 768px)
+    gap: 3rem
+
 
 .overflow-y-auto
   overflow-x: auto

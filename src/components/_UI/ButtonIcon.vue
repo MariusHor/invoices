@@ -1,9 +1,10 @@
 <script setup>
 import { computed } from 'vue'
 const { text, variant, isLink, to, width, type } = defineProps({
-  text: {
-    type: String,
-    required: true
+  text: String,
+  hideTextOnSmRes: {
+    type: Boolean,
+    default: false
   },
   variant: {
     type: String,
@@ -43,17 +44,23 @@ const variantClass = computed(() => `button--${variant} ${width}`)
     @click="emit('handleClick')"
   >
     <slot name="start"></slot>
-    <span>{{ text }}</span>
+    <span :class="hideTextOnSmRes ? 'hide' : ''">{{ text }}</span>
     <slot name="end"></slot>
   </button>
   <router-link v-if="isLink" class="button" :class="variantClass" :to="to">
     <slot name="start"></slot>
-    {{ text }}
+    <span :class="hideTextOnSmRes ? 'hide' : ''">{{ text }}</span>
     <slot name="end"></slot>
   </router-link>
 </template>
 
 <style scoped lang="sass">
+.hide
+  display: none
+  @media screen and (min-width: 640px)
+    display: block
+
+
 .button
     border-radius: 3px
     display: flex
