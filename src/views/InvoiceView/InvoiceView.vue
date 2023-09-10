@@ -28,7 +28,9 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
                     <span v-if="key === 'firstName'"
                       >{{ invoice.client[key] }} {{ invoice.client['lastName'] }}</span
                     >
-                    <span v-else-if="key !== 'lastName'">{{ invoice.client[key] }}</span>
+                    <span v-else-if="key !== 'lastName'">{{
+                      invoice.client[key] ? invoice.client[key] : 'Necompletat'
+                    }}</span>
                   </li>
                 </template>
               </ul>

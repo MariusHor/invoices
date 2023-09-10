@@ -29,7 +29,7 @@ defineProps({
     </div>
     <div>
       <h3>Descriere</h3>
-      <p>{{ description }}</p>
+      <p>{{ description ? description : 'Necompletat' }}</p>
     </div>
   </div>
 </template>

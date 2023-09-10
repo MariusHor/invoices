@@ -26,9 +26,9 @@ defineProps({
       <tr v-for="(item, index) in items" :key="index" height="40px">
         <td width="150" v-for="(key, index) in Object.keys(item)" :key="index">
           <span v-if="key === 'price' || key === 'total'"
-            >{{ currency }} {{ item[key].toFixed(2) }}</span
+            >{{ currency }} {{ item[key] ? item[key].toFixed(2) : 'Necompletat' }}</span
           >
-          <span v-else>{{ item[key] }}</span>
+          <span v-else>{{ item[key] ? item[key] : 'Necompletat' }}</span>
         </td>
       </tr>
     </tbody>
