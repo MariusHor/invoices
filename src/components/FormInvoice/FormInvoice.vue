@@ -100,7 +100,7 @@ function formSubmitHandler(values) {
           />
         </template>
         <template #end>
-          <DatePicker />
+          <DatePicker :dateValue="formValues.date" />
           <FormField
             :is-text-area="true"
             :name="'description'"

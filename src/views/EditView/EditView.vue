@@ -9,10 +9,8 @@ const store = useStore()
 const route = useRoute()
 
 const invoice = computed(() => {
-  console.log(route.params.id)
   return store.getters['invoices/getInvoice'](route.params.id)
 })
-console.log('EDIT')
 </script>
 
 <template>

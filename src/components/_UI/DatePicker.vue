@@ -6,7 +6,22 @@ import VueDatePicker from '@vuepic/vue-datepicker'
 import { Icon } from '@iconify/vue'
 import FormField from './FormField.vue'
 
-const date = ref(new Date())
+const { dateValue } = defineProps({
+  dateValue: {
+    type: String,
+    required: true
+  }
+})
+
+const date = ref(dateValue || new Date())
+
+const format = (date) => {
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+
+  return `${day}/${month}/${year}`
+}
 
 const { handleChange } = useField('date')
 
@@ -16,7 +31,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <VueDatePicker v-model="date" :enable-time-picker="false">
+  <VueDatePicker v-model="date" :enable-time-picker="false" :format="format">
     <template #dp-input="{ value }">
       <FormField :name="'date'" :label="'Data'" id="datePicker" :handles-date="true">
         <template #dateInput>
