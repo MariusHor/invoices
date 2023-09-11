@@ -2,7 +2,7 @@
 import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
 import { ButtonIcon } from './_UI'
-import { ModalNavigateBack } from '@/components/'
+import { ModalNavigateBack } from './'
 
 defineProps({
   shouldDisplayModal: {

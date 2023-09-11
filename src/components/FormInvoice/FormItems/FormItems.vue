@@ -1,9 +1,8 @@
 <script setup>
 import { FieldArray } from 'vee-validate'
+import { InvoiceTotal, ButtonAdd } from '@/components'
 import FormItem from './FormItem/FormItem.vue'
-import ButtonAdd from '@/components/ButtonAdd.vue'
 import { INVOICE_UNITS_OPTIONS } from '@/helpers'
-import { InvoiceTotal } from '../..'
 </script>
 
 <template>

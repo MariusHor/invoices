@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { DropdownGeneric } from '@/components/_UI'
+import { DropdownGeneric } from './_UI'
 import { SORTING_OPTIONS } from '@/helpers'
 
 const store = useStore()

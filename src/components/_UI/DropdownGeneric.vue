@@ -11,7 +11,8 @@ const { options, currentSelectedOption } = defineProps({
   disabled: {
     type: Boolean,
     default: false
-  }
+  },
+  listVariant: String
 })
 
 const emit = defineEmits(['setCurrentSelectedOption'])
@@ -52,7 +53,11 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
       class="select__icon"
       :class="selectIconClass"
     />
-    <ul v-if="currentDropdownState === DROPDOWN_STATES[1]" class="select__list">
+    <ul
+      v-if="currentDropdownState === DROPDOWN_STATES[1]"
+      class="select__list"
+      :class="listVariant"
+    >
       <li
         v-for="option in options"
         :key="option"
@@ -67,6 +72,8 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 </template>
 
 <style scoped lang="sass">
+.reversed
+  top: -150px
 .select
   width: 100%
   height: fit-content

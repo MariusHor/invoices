@@ -1,6 +1,7 @@
 import {
   SORTING_OPTIONS,
   INVOICE_CURRENCY_OPTIONS,
+  INVOICE_PER_PAGE_OPTIONS,
   compareStringDates,
   formatStringDate,
   formatInvoice,
@@ -13,7 +14,8 @@ const state = {
   currentSortingOption: SORTING_OPTIONS[0],
   items: [],
   activeCurrency: INVOICE_CURRENCY_OPTIONS[0],
-  formCurrency: INVOICE_CURRENCY_OPTIONS[0]
+  formCurrency: INVOICE_CURRENCY_OPTIONS[0],
+  maxInvPerPage: INVOICE_PER_PAGE_OPTIONS[0]
 }
 
 const getters = {
@@ -68,6 +70,9 @@ const mutations = {
   },
   setActiveCurrency: (state, value) => {
     state.activeCurrency = value
+  },
+  setMaxInvPerPage: (state, value) => {
+    state.maxInvPerPage = value
   },
   addInvoice: (state, invoice) => {
     const id = getInvoiceId(invoice.client.firstName, invoice.client.lastName, 7)

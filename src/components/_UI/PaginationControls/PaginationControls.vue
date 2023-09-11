@@ -32,6 +32,8 @@ const emit = defineEmits(['increasePageCount', 'decreasePageCount'])
     gap: 1rem
     width: fit-content
     margin: 0 auto
+    @media screen and (min-width: 640px)
+      grid-column-start: 2
 
     &__control, &__current
         display: grid

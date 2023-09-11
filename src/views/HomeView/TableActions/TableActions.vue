@@ -3,8 +3,9 @@ import { ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import { useMediaQuery } from '@vueuse/core'
 
-import { ButtonAdd, ModalTableOptions, DropdownSorting, DropdownCurrency } from '@/components'
+import { ButtonAdd, DropdownSorting, DropdownCurrency } from '@/components'
 import { ButtonIcon } from '@/components/_UI'
+import ModalTableOptions from '../ModalTableOptions/ModalTableOptions.vue'
 
 const isSmallScreen = useMediaQuery('(max-width: 640px)')
 const showOptionsModal = ref(false)
