@@ -18,7 +18,8 @@ defineProps({
   hideTextOnSmRes: {
     type: Boolean,
     default: true
-  }
+  },
+  width: String
 })
 
 const emit = defineEmits(['handleClick'])
@@ -26,6 +27,7 @@ const emit = defineEmits(['handleClick'])
 
 <template>
   <ButtonIcon
+    :width="width"
     :text="'Adauga'"
     :variant="variant"
     :isLink="isLink"

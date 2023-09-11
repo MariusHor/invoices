@@ -23,6 +23,7 @@ import { InvoiceTotal } from '../..'
         </div>
 
         <ButtonAdd
+          :width="'full'"
           :isLink="false"
           @handleClick="
             () => push({ title: '', price: '', quantity: 1, unit: INVOICE_UNITS_OPTIONS[0] })
@@ -47,10 +48,11 @@ import { InvoiceTotal } from '../..'
   display: flex
   flex-direction: column
   gap: 1rem
-  padding-right: 5px
+  width: 100%
   @media screen and (min-width: 840px)
     max-height: 154px
     overflow-y: scroll
+    padding-right: 5px
 .items
   gap: 1rem
   height: 100%
@@ -59,10 +61,15 @@ import { InvoiceTotal } from '../..'
   &__wrapper
     align-items: center
     gap: 1rem
+    max-width: 250px
+    margin: 0 auto
+    @media screen and (min-width: 840px)
+      max-width: none
 
   fieldset
     display: flex
     flex-direction: column
+    align-items: center
     gap: 1rem
     width: 100%
     border: solid 1px var(--clr-light-grey)

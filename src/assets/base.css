@@ -2,7 +2,7 @@
   --clr-white: #ffffff;
   --clr-black: #000000;
   --clr-light-grey: #dfdfdf;
-  --clr-dark-grey: #616161;
+  --clr-dark-grey: #8f8f8f;
 
   --divider-light-1: var(--clr-light-grey);
   --divider-dark-1: var(--clr-dark-grey);
@@ -78,6 +78,7 @@ button {
 button:disabled,
 input:disabled {
   cursor: initial !important;
+  opacity: 0.3;
 }
 
 fieldset {
