@@ -1,7 +1,7 @@
 <script setup>
-import DropdownSorting from './DropdownSorting.vue'
-import DropdownCurrency from './DropdownCurrency.vue'
-import { ModalGeneric } from './_UI'
+import { DropdownSorting, DropdownCurrency } from '@/components'
+import { ModalGeneric } from '@/components/_UI'
+import MaxInvSelect from '../MaxInvSelect/MaxInvSelect.vue'
 
 defineProps({
   showModal: {
@@ -18,6 +18,7 @@ defineEmits(['close-modal'])
     <template #body>
       <DropdownSorting :optClass="'max-w-10'" />
       <DropdownCurrency :optClass="'max-w-10'" />
+      <MaxInvSelect :max-inv-per-page="$store.state.invoices.maxInvPerPage" />
     </template>
   </ModalGeneric>
 </template>

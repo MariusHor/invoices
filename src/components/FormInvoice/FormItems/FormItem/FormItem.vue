@@ -3,10 +3,9 @@ import { Icon } from '@iconify/vue'
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { FormField, FormFieldCurrency } from '@/components/_UI'
+import { FormField, FormFieldCurrency, ButtonIcon } from '@/components/_UI'
 import DropdownForm from '../../DropdownForm/DropdownForm.vue'
 import { INVOICE_UNITS_OPTIONS } from '@/helpers'
-import { ButtonIcon } from '../../../_UI'
 
 const store = useStore()
 
