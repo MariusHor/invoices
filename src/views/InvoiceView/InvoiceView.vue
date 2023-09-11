@@ -22,15 +22,16 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
         <div class="invoice__left-pane flex-column">
           <SectionLayout :headerText="'Client'" :height="'fit'">
             <template #end>
-              <ul>
+              <template v-if="Object.values(invoice.client).some((value) => !value)"
+                >Necompletat</template
+              >
+              <ul v-else>
                 <template v-for="key in Object.keys(invoice.client)" :key="key">
                   <li>
                     <span v-if="key === 'firstName'"
                       >{{ invoice.client[key] }} {{ invoice.client['lastName'] }}</span
                     >
-                    <span v-else-if="key !== 'lastName'">{{
-                      invoice.client[key] ? invoice.client[key] : 'Necompletat'
-                    }}</span>
+                    <span v-else-if="key !== 'lastName'">{{ invoice.client[key] }}</span>
                   </li>
                 </template>
               </ul>
