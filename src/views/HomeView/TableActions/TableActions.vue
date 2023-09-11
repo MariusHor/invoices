@@ -6,13 +6,6 @@ import { useMediaQuery } from '@vueuse/core'
 import { ButtonAdd, ModalTableOptions, DropdownSorting, DropdownCurrency } from '@/components'
 import { ButtonIcon } from '@/components/_UI'
 
-defineProps({
-  hasInvoices: {
-    type: Boolean,
-    required: true
-  }
-})
-
 const isSmallScreen = useMediaQuery('(max-width: 640px)')
 const showOptionsModal = ref(false)
 </script>
@@ -21,8 +14,8 @@ const showOptionsModal = ref(false)
   <div class="table-actions">
     <div class="table-actions__left">
       <template v-if="!isSmallScreen">
-        <DropdownSorting :optClass="'max-w-10'" :disabled="!hasInvoices" />
-        <DropdownCurrency :optClass="'max-w-10'" :disabled="!hasInvoices" />
+        <DropdownSorting :optClass="'max-w-10'" />
+        <DropdownCurrency :optClass="'max-w-10'" />
       </template>
       <template v-if="isSmallScreen">
         <ButtonIcon :hideTextOnSmRes="true" @handleClick="showOptionsModal = true">
@@ -30,11 +23,7 @@ const showOptionsModal = ref(false)
             <Icon icon="iconamoon:options" width="24" />
           </template>
         </ButtonIcon>
-        <ModalTableOptions
-          @close-modal="showOptionsModal = false"
-          :show-modal="showOptionsModal"
-          :has-invoices="hasInvoices"
-        />
+        <ModalTableOptions @close-modal="showOptionsModal = false" :show-modal="showOptionsModal" />
       </template>
     </div>
     <ButtonAdd :variant="'dark-md'" />
