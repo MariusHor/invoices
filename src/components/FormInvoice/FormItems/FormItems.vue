@@ -47,6 +47,7 @@ import { InvoiceTotal } from '../..'
   display: flex
   flex-direction: column
   gap: 1rem
+  padding-right: 5px
   @media screen and (min-width: 840px)
     max-height: 154px
     overflow-y: scroll

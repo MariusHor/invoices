@@ -41,7 +41,7 @@ const currentPageInvoices = computed(() =>
       </div>
       <div v-if="!currentPageInvoices.length" class="fallback flex-column">
         <h2>Momentan nu exista facturi salvate</h2>
-        <ButtonAdd :text="'Adauga'" :variant="'dark-md'" />
+        <ButtonAdd :text="'Adauga'" :variant="'dark-md'" :hideTextOnSmRes="false" />
       </div>
     </template>
   </AppLayout>
@@ -54,6 +54,7 @@ const currentPageInvoices = computed(() =>
   align-items: center
   gap: 1rem
   flex: 1
+  text-align: center
 .table-wrapper
   flex: 1
   justify-content: space-between

@@ -37,6 +37,7 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 <template>
   <div ref="target" class="select" :class="optClass">
     <input
+      readonly
       class="select__input"
       @click="handleCurrentState"
       :value="currentSelectedOption"

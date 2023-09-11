@@ -14,6 +14,10 @@ defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  hideTextOnSmRes: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -27,7 +31,7 @@ const emit = defineEmits(['handleClick'])
     :isLink="isLink"
     :to="'/create'"
     :disabled="disabled"
-    :hideTextOnSmRes="true"
+    :hideTextOnSmRes="hideTextOnSmRes"
     @handleClick="emit('handleClick')"
   >
     <template #start>
