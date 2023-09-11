@@ -11,8 +11,7 @@ export function formatStringDate(stringDate) {
   const inputDate = parseDateString(stringDate)
 
   const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
-  const date = inputDate.toLocaleDateString('en-GB', options)
-  return date
+  return inputDate.toLocaleDateString('en-GB', options)
 }
 
 function parseDateString(dateString) {

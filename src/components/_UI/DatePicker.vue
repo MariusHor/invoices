@@ -8,7 +8,7 @@ import FormField from './FormField.vue'
 
 const { dateValue } = defineProps({
   dateValue: {
-    type: String,
+    type: [String, Date],
     required: true
   }
 })
@@ -31,7 +31,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <VueDatePicker v-model="date" :enable-time-picker="false" :format="format">
+  <VueDatePicker v-model="date" :enable-time-picker="false" :format="format" :locale="'de'">
     <template #dp-input="{ value }">
       <FormField :name="'date'" :label="'Data'" id="datePicker" :handles-date="true">
         <template #dateInput>

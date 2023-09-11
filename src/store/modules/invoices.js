@@ -19,14 +19,8 @@ const state = {
 }
 
 const getters = {
-  getInvoice: (state) => (id) => {
-    const invoice = state.items.find((invoice) => invoice.id === id || invoice.draftId === id)
-
-    return {
-      ...invoice,
-      date: formatStringDate(invoice.date)
-    }
-  },
+  getInvoice: (state) => (id) =>
+    state.items.find((invoice) => invoice.id === id || invoice.draftId === id),
   getCurrentPageInvoices: (state) => (startIndex, endIndex) => {
     const sortingOption = state.currentSortingOption
     const invoices = state.items.map((invoice) => ({
