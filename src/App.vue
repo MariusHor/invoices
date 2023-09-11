@@ -27,12 +27,6 @@ import { LogoMain } from '@/components/_UI'
   display: flex
   flex-direction: row
 
-.max-w-10
-  max-width: 10rem
-
-.max-w-9
-  max-width: 9rem
-
 .active
     background: var(--clr-light-grey)
 

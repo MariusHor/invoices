@@ -69,8 +69,8 @@ defineEmits(['close-modal', 'confirm-action'])
 
 .close-icon {
   position: absolute;
-  top: 1.375rem;
-  right: 1.375rem;
+  top: 0.875rem;
+  right: 0.875rem;
   color: var(--clr-dark-grey);
 }
 

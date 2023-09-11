@@ -12,7 +12,11 @@ const { options, currentSelectedOption } = defineProps({
     type: Boolean,
     default: false
   },
-  listVariant: String
+  listVariant: String,
+  isStatic: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const emit = defineEmits(['setCurrentSelectedOption'])
@@ -44,7 +48,13 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
       :value="currentSelectedOption"
       :name="name"
       :disabled="disabled"
+      v-if="!isStatic"
     />
+
+    <button v-if="isStatic" class="select__input" @click="handleCurrentState">
+      <slot name="staticContent"></slot>
+    </button>
+
     <img
       src="/select-arrow.svg"
       width="16"

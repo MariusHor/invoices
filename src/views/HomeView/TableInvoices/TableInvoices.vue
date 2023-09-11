@@ -72,12 +72,12 @@ thead
 td, th
   padding: 1rem
   border-bottom: solid 1px var(--clr-light-grey)
+
+td:not(:last-child), th:not(:last-child)
   border-right: solid 1px var(--clr-light-grey)
-  text-overflow: ellipsis
 
-
-td:nth-child(1)
-  border-left: solid 1px var(--clr-light-grey)
+th
+  border-top: solid 1px var(--clr-light-grey)
 
 th
   font-weight: bold

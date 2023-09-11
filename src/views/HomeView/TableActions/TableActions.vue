@@ -15,8 +15,8 @@ const showOptionsModal = ref(false)
   <div class="table-actions">
     <div class="table-actions__left">
       <template v-if="!isSmallScreen">
-        <DropdownSorting :optClass="'max-w-10'" />
-        <DropdownCurrency :optClass="'max-w-10'" />
+        <DropdownSorting :optClass="'max-w-13'" />
+        <DropdownCurrency :optClass="'max-w-9'" />
       </template>
       <template v-if="isSmallScreen">
         <ButtonIcon :hideTextOnSmRes="true" @handleClick="showOptionsModal = true">
@@ -40,4 +40,5 @@ const showOptionsModal = ref(false)
   &__left
     display: flex
     gap: 0.5rem
+    width: 100%
 </style>

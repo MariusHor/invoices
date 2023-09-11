@@ -30,8 +30,8 @@ const currentPageInvoices = computed(() =>
     <template #content>
       <template v-if="currentPageInvoices.length">
         <TableActions />
-        <div class="table-wrapper flex-column">
-          <div class="overflow-x-auto">
+        <div class="section-wrapper flex-column">
+          <div class="table-wrapper overflow-x-auto">
             <TableInvoices :current-page-invoices="currentPageInvoices" />
           </div>
           <div class="table-controls">
@@ -60,7 +60,7 @@ const currentPageInvoices = computed(() =>
     display: grid
     grid-template-columns: repeat(3, 1fr)
 
-.table-wrapper
+.section-wrapper
   flex: 1
   justify-content: space-between
   gap: 1rem
@@ -70,6 +70,9 @@ const currentPageInvoices = computed(() =>
   @media screen and (min-width: 768px)
     gap: 3rem
 
+.table-wrapper
+  border-left: solid 1px var(--clr-light-grey)
+  border-right: solid 1px var(--clr-light-grey)
 .overflow-x-auto
   overflow-x: auto
 </style>

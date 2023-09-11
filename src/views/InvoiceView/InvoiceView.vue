@@ -8,6 +8,7 @@ import { InvoiceTotal, SectionLayout } from '@/components'
 import InvoiceActions from './InvoiceActions/InvoiceActions.vue'
 import InvoiceItemTable from './InvoiceItemTable/InvoiceItemTable.vue'
 import InvoiceDetails from './InvoiceDetails/InvoiceDetails.vue'
+import { formatStringDate } from '../../helpers/utils'
 
 const store = useStore()
 const route = useRoute()
@@ -40,7 +41,7 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
           <SectionLayout :headerText="'Articole'">
             <template #end>
               <div class="invoice__table-wrapper flex-column">
-                <div>
+                <div class="table-wrapper">
                   <InvoiceItemTable :items="invoice.items" :currency="invoice.currency" />
                 </div>
                 <InvoiceTotal :currency="invoice.currency" :total="invoice.total" />
@@ -51,7 +52,7 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
         <div class="invoice__right-pane flex-column">
           <InvoiceDetails
             :status="invoice.status"
-            :date="invoice.date"
+            :date="formatStringDate(invoice.date)"
             :description="invoice.description"
           />
           <InvoiceActions :id="invoice.id" />
@@ -62,6 +63,9 @@ const invoice = computed(() => store.getters['invoices/getInvoice'](route.params
 </template>
 
 <style scoped lang="sass">
+.table-wrapper
+  border-left: solid 1px var(--clr-light-grey)
+  border-right: solid 1px var(--clr-light-grey)
 .invoice
     display: flex
     flex-direction: column
