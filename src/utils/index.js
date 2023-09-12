@@ -17,4 +17,4 @@ export {
   getInvoiceId,
   formatTotal,
   formatInvoice
-} from './utils'
+} from './helpers'

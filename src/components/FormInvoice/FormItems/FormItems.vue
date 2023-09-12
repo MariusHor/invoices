@@ -2,7 +2,7 @@
 import { FieldArray } from 'vee-validate'
 import { InvoiceTotal, ButtonAdd } from '@/components'
 import FormItem from './FormItem/FormItem.vue'
-import { INVOICE_UNITS_OPTIONS } from '@/helpers'
+import { INVOICE_UNITS_OPTIONS } from '@/utils'
 </script>
 
 <template>

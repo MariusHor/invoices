@@ -1,11 +1,13 @@
 <script setup>
 import { DropdownGeneric } from '@/components/_UI'
-import { INVOICE_PER_PAGE_OPTIONS } from '@/helpers'
+import { INVOICE_PER_PAGE_OPTIONS } from '@/utils'
+import { useMaxInvPerPage } from '@/composables'
 
 defineProps({
-  maxInvPerPage: Number,
   listVariant: String
 })
+
+const { maxInvPerPage } = useMaxInvPerPage()
 </script>
 
 <template>

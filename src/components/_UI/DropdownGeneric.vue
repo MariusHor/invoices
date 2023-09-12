@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import { DROPDOWN_STATES } from '@/helpers'
+import { DROPDOWN_STATES } from '@/utils'
 
 const { options, currentSelectedOption } = defineProps({
   name: String,
@@ -52,7 +52,9 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
     />
 
     <button v-if="isStatic" class="select__input" @click="handleCurrentState">
-      <slot name="staticContent"></slot>
+      <div class="content">
+        <slot name="staticContent"></slot>
+      </div>
     </button>
 
     <img
@@ -82,6 +84,11 @@ onClickOutside(target, () => (currentDropdownState.value = DROPDOWN_STATES[0]))
 </template>
 
 <style scoped lang="sass">
+.content
+  display: flex
+  justify-content: center
+  align-items: center
+  gap: 1rem
 .reversed
   top: -150px
 .select

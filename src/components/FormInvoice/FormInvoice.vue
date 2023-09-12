@@ -9,7 +9,7 @@ import { SectionLayout } from '@/components'
 import FormItems from './FormItems/FormItems.vue'
 import FormActions from './FormActions/FormActions.vue'
 import DropdownForm from './DropdownForm/DropdownForm.vue'
-import { INVOICE_STATUS_OPTIONS, FORM_INITIAL_DATA, INVOICE_CURRENCY_OPTIONS } from '@/helpers'
+import { INVOICE_STATUS_OPTIONS, FORM_INITIAL_DATA, INVOICE_CURRENCY_OPTIONS } from '@/utils'
 import { invoiceValidationSchema } from '@/schemas'
 
 const { isEditing, formValues, wasDraft } = defineProps({

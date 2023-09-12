@@ -1,17 +1,10 @@
 <script setup>
-import { ref } from 'vue'
 import InvoiceActions from '../InvoiceActions/InvoiceActions.vue'
-import { INVOICES_TABLE_HEADINGS } from '@/helpers'
+import { INVOICES_TABLE_HEADINGS } from '@/utils'
+import { usePagination, useExpandInvoice } from '@/composables'
 
-const { currentPageInvoices } = defineProps({
-  currentPageInvoices: Array
-})
-
-const invoiceToExpandId = ref(null)
-
-function toggleExpandInvoice(id) {
-  invoiceToExpandId.value = invoiceToExpandId.value === id ? null : id
-}
+const { currentPageInvoices } = usePagination()
+const { invoiceToExpandId, toggleExpandInvoice } = useExpandInvoice()
 </script>
 
 <template>

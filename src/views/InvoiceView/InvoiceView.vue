@@ -1,19 +1,13 @@
 <script setup>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
-
 import { AppLayout } from '@/layouts'
+import { formatStringDate } from '@/utils'
+import { useInvoice } from '@/composables'
 import { InvoiceTotal, SectionLayout } from '@/components'
 import InvoiceActions from './InvoiceActions/InvoiceActions.vue'
 import InvoiceItemTable from './InvoiceItemTable/InvoiceItemTable.vue'
 import InvoiceDetails from './InvoiceDetails/InvoiceDetails.vue'
-import { formatStringDate } from '../../helpers/utils'
 
-const store = useStore()
-const route = useRoute()
-
-const invoice = computed(() => store.getters['invoices/getInvoice'](route.params.id))
+const { invoice } = useInvoice()
 </script>
 
 <template>

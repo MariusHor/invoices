@@ -5,7 +5,7 @@ import { useStore } from 'vuex'
 
 import { FormField, FormFieldCurrency, ButtonIcon } from '@/components/_UI'
 import DropdownForm from '../../DropdownForm/DropdownForm.vue'
-import { INVOICE_UNITS_OPTIONS } from '@/helpers'
+import { INVOICE_UNITS_OPTIONS } from '@/utils'
 
 const store = useStore()
 

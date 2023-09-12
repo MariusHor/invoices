@@ -1,5 +1,5 @@
 <script setup>
-import { ITEM_TABLE_HEADINGS } from '@/helpers'
+import { ITEM_TABLE_HEADINGS } from '@/utils'
 
 defineProps({
   items: {

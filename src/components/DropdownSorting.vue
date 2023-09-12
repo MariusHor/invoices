@@ -1,32 +1,26 @@
 <script setup>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
 import { Icon } from '@iconify/vue'
 
 import { DropdownGeneric } from './_UI'
-import { SORTING_OPTIONS } from '@/helpers'
+import { SORTING_OPTIONS } from '@/utils'
+import { useDropdownOption } from '@/composables'
 
-const store = useStore()
-
-const currentSortingOption = computed(() => store.state.invoices.currentSortingOption)
-
-function commitSortingOption(option) {
-  store.commit('invoices/setCurrentSortingOption', option)
-}
+const { currentOption, commitOption } = useDropdownOption(
+  'invoices/setCurrentSortingOption',
+  'currentSortingOption'
+)
 </script>
 
 <template>
   <DropdownGeneric
     :isStatic="true"
     :options="SORTING_OPTIONS"
-    :currentSelectedOption="currentSortingOption"
-    @setCurrentSelectedOption="commitSortingOption"
+    :currentSelectedOption="currentOption"
+    @setCurrentSelectedOption="commitOption"
   >
     <template #staticContent>
-      <div class="content">
-        <Icon icon="basil:sort-outline" width="28" />
-        <span>{{ currentSortingOption }}</span>
-      </div>
+      <Icon icon="basil:sort-outline" width="28" />
+      <span>{{ currentOption }}</span>
     </template>
   </DropdownGeneric>
 </template>

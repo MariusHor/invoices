@@ -8,7 +8,7 @@ import {
   removeCurrency,
   getInvoiceId,
   formatTotal
-} from '@/helpers'
+} from '@/utils'
 
 const state = {
   currentSortingOption: SORTING_OPTIONS[0],
@@ -48,7 +48,7 @@ const getters = {
 
     const sortedInvoices = invoices
       .sort(sortingFunction)
-      .slice(startIndex.value, endIndex.value)
+      .slice(startIndex, endIndex)
       .map((invoice) => ({ ...invoice, date: formatStringDate(invoice.date) }))
 
     return sortedInvoices

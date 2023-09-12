@@ -14,6 +14,7 @@ const { dateValue } = defineProps({
 })
 
 const date = ref(dateValue || new Date())
+const { handleChange } = useField('date')
 
 const format = (date) => {
   const day = date.getDate()
@@ -22,8 +23,6 @@ const format = (date) => {
 
   return `${day}/${month}/${year}`
 }
-
-const { handleChange } = useField('date')
 
 watchEffect(() => {
   handleChange(date.value)

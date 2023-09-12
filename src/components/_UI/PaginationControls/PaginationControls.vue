@@ -1,27 +1,21 @@
 <script setup>
+import { useCurrentPage, useNextPage } from '@/composables'
+
 import PaginationButton from './PaginationButton.vue'
 
-defineProps({
-  currentPage: Number,
-  hasNextPage: Boolean
-})
-
-const emit = defineEmits(['increasePageCount', 'decreasePageCount'])
+const { currentPage } = useCurrentPage()
+const { hasNextPage } = useNextPage()
 </script>
 
 <template>
   <div class="pagination">
     <PaginationButton
       :imgClass="'icon-prev'"
-      @click="emit('decreasePageCount')"
+      @click="currentPage -= 1"
       :disabled="currentPage === 1"
     />
     <span class="pagination__current">{{ currentPage }}</span>
-    <PaginationButton
-      :imgClass="'icon-next'"
-      @click="emit('increasePageCount')"
-      :disabled="!hasNextPage"
-    />
+    <PaginationButton :imgClass="'icon-next'" @click="currentPage += 1" :disabled="!hasNextPage" />
   </div>
 </template>
 
