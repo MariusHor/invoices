@@ -6,7 +6,7 @@ export const SORTING_OPTIONS = ['Cele mai noi', 'Cele mai vechi', 'Suma mai mare
 export const INVOICE_STATUS_OPTIONS = ['Done', 'Pending']
 export const INVOICE_UNITS_OPTIONS = ['Ore', 'Zile', 'Saptamani', 'Luni']
 export const INVOICE_CURRENCY_OPTIONS = ['EUR', 'USD', 'GBP']
-export const INVOICE_PER_PAGE_OPTIONS = ['1', '2', '3']
+export const INVOICE_PER_PAGE_OPTIONS = [1, 2, 3]
 
 export const CONVERSION_RATES = {
   [`${INVOICE_CURRENCY_OPTIONS[0]}_${INVOICE_CURRENCY_OPTIONS[1]}`]: 0.93,

@@ -3,7 +3,7 @@ import { DropdownGeneric } from '@/components/_UI'
 import { INVOICE_PER_PAGE_OPTIONS } from '@/helpers'
 
 defineProps({
-  maxInvPerPage: String,
+  maxInvPerPage: Number,
   listVariant: String
 })
 </script>

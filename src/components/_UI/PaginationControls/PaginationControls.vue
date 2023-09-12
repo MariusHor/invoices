@@ -14,7 +14,7 @@ const emit = defineEmits(['increasePageCount', 'decreasePageCount'])
     <PaginationButton
       :imgClass="'icon-prev'"
       @click="emit('decreasePageCount')"
-      :disabled="currentPage === 0"
+      :disabled="currentPage === 1"
     />
     <span class="pagination__current">{{ currentPage }}</span>
     <PaginationButton

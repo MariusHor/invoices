@@ -1,6 +1,6 @@
 <script setup>
 import { AppLayout } from '@/layouts'
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import { useMediaQuery } from '@vueuse/core'
 
@@ -11,18 +11,24 @@ import InvoicesFallback from './InvoicesFallback/InvoicesFallback.vue'
 import MaxInvSelect from './MaxInvSelect/MaxInvSelect.vue'
 
 const store = useStore()
-const currentPage = ref(0)
+const currentPage = ref(1)
 
 const isSmallScreen = useMediaQuery('(max-width: 640px)')
 
 const maxInvPerPage = computed(() => store.state.invoices.maxInvPerPage)
 const invoices = computed(() => store.state.invoices.items)
-const startIndex = computed(() => currentPage.value * maxInvPerPage.value)
+const startIndex = computed(() => (currentPage.value - 1) * maxInvPerPage.value)
 const endIndex = computed(() => startIndex.value + maxInvPerPage.value)
 const hasNextPage = computed(() => endIndex.value < invoices.value.length)
 const currentPageInvoices = computed(() =>
   store.getters['invoices/getCurrentPageInvoices'](startIndex, endIndex)
 )
+
+watchEffect(() => {
+  while (!currentPageInvoices.value.length && currentPage.value > 1) {
+    currentPage.value -= 1
+  }
+})
 </script>
 
 <template>

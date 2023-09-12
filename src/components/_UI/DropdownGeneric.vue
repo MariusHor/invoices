@@ -6,7 +6,7 @@ import { DROPDOWN_STATES } from '@/helpers'
 const { options, currentSelectedOption } = defineProps({
   name: String,
   options: Array,
-  currentSelectedOption: String,
+  currentSelectedOption: [String, Number],
   optClass: String,
   disabled: {
     type: Boolean,
